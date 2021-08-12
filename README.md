@@ -103,28 +103,19 @@ Commande alternative : [mkpart](https://docs.fedoraproject.org/en-US/quick-docs/
 3. LVMGroup
 4. /dev/mapper/sda5_crypt
 5. Create logical volume
-    - root 10,75G (7% de 10G) 
-      - use ad : Ext4 journaling file system
-    - Mount point : / - the root file system
-      - swap 2,5G (7% de 2,3G) 
-      - use as : swap area [SWAP] 
-    - home 5,4G (7% de 5G)
-      - use ad : Ext4 journaling file system
-    - Mount point : /home - user home directory
-      - var 3,25G (7% de 3G) 
-	    - use ad : Ext4 journaling file system
-    - Mount point : /var - variable data
-      - srv 3,25G (7% de 3G) 
-      - use ad : Ext4 journaling file system
-    - Mount point : /srv - data for services provided by this system
-      - tmp 3,25G (7% de 3G) 
-      - use ad : Ext4 journaling file system
-    - Mount point :  /tmp - temporary files
-      - var-log (un seul tiret) (mettre le reste)
-      - use ad : Ext4 journaling file system
-    - Mount point : ENTER 
-      - MANUALLY -> /var/log
-    - finish
+
+| Volume & size | use as : | Mont point : | 
+| :----------: | :----------: | :----------: | 
+root 10,75G (7% de 10G) | Ext4 journaling file system | Mount point : / - the root file system
+swap 2,5G (7% de 2,3G) | swap area [SWAP] | |
+home 5,4G (7% de 5G) | Ext4 journaling file system | /home - user home directory 
+var 3,25G (7% de 3G) | Ext4 journaling file system | /var - variable data 
+srv 3,25G (7% de 3G) | Ext4 journaling file system | /srv - data for services provided by this system 
+tmp 3,25G (7% de 3G) | Ext4 journaling file system | /tmp - temporary files 
+var-log (un seul tiret) (mettre le reste) | Ext4 journaling file system | ENTER MANUALLY -> /var/log 
+
+* finish
+
 6. finish partitioning and write changes to disk
 7. yes
 
@@ -368,7 +359,7 @@ To use chage command, syntax is: <br/>
       * `$ sudo vim /etc/pam.d/common-password`
         * ÉCRIRE APRÈS password	requisite	pam_pwquality.so retry=3
 Ajouter les restrictions : | |
-|:---:|---|
+| :---: | --- |
 retry= | No. of consecutive times a user can enter an incorrect password.
 minlen= | Minimum length of password (10 caractères)
 maxrepeat= | To set a maximum of x consecutive identical characters (3)
