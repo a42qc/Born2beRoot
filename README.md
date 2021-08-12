@@ -204,10 +204,11 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)
 
 ### Installation openSSH-server
-      * `$ sudo apt install openssh-server` <br/>
-      * `reboot`
+   * `$ sudo apt install openssh-server` <br/>
+   * `reboot`
 #### Vérifier si SSH installé
-      * `$ dpkg -l | grep ssh`
+   * `$ dpkg -l | grep ssh`
+
 
 ### Statut
 - Vérifier si SSH est activé : 
@@ -217,7 +218,7 @@ La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/co
 - Redémarrer SSH : 
       * `$ sudo systemctl restart sshd`
 - Arrêter SSH : 
-      *`$ sudo systemctl stop sshd`
+      * `$ sudo systemctl stop sshd`
 
 Installer et configurer un [serveur SSH](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr")
 
@@ -243,7 +244,7 @@ Vérifier statut :
 $ `service ssh status` (OU `$ systemctl status ssh`)
 
 ### Vérifier ports ouverts
-      * `$ ss -tulw`
+   * `$ ss -tulw`
       
 How to change [ssh port](https://www.cyberciti.biz/faq/howto-change-ssh-port-on-linux-or-unix-server/ "cyberciti.biz")<br/>
 Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr") command
@@ -257,10 +258,10 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
       * `dpkg -l | grep ufw`
 
 ### Statut du pare-feu et activation d'un port
-      - `$ sudo ufw status`
-      - `$ sudo ufw enable`
-      - `$ sudo ufw allow NUMÉROduPORT` (ici, on veut 4242, 80(http) et 21(FTP))
-      - `$ sudo ufw delete allow NUMÉROduPORT`
+   - `$ sudo ufw status`
+   - `$ sudo ufw enable`
+   - `$ sudo ufw allow NUMÉROduPORT` (ici, on veut 4242, 80(http) et 21(FTP))
+   - `$ sudo ufw delete allow NUMÉROduPORT`
 
 
 ## 4. Connection au server via SSH (connection à distance)
@@ -271,12 +272,12 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
 3. `ssh NOMd'UTILISATEUR@ADRESSEip -p NUMÉROduPORT`
       * exemple : `ssh audrey@10.12.231.216 -p 4242`
 ### Terminer un session SSH
-      * `$ logout` (**ou** `$ exit`)
+   * `$ logout` (**ou** `$ exit`)
 
 
 ## 5. Hostname
 ### Trouver le nom d'hôte
-      * `$ hostname`
+   * `$ hostname`
 ### Configurer
 1. Modifier nom dans : 
       * `$ sudo vim /etc/hostname`
@@ -341,23 +342,23 @@ To use chage command, syntax is: <br/>
       * $ chage [options] username
 
 ##### To view the current password expiry/aging details, the command is :
-      * `$ sudo chage –l USERNAME`
+   * `$ sudo chage –l USERNAME`
 ##### To configure the maximum No. of days after which a user should change the password.
-      * `$ sudo chage -M <No./_of_days> <user_name>`
+   * `$ sudo chage -M <No./_of_days> <user_name>`
 ##### To configure the minimum No. of days required between the change of password.
-      * `$ sudo chage -m <No._of_days> <user_name>`
+   * `$ sudo chage -m <No._of_days> <user_name>`
 ##### To configure warning prior to password expiration :
-      * `$ sudo chage -W <No._of_days> <user_name>`
+   * `$ sudo chage -W <No._of_days> <user_name>`
 
 
 ### Complexité (password strength) pam.d
 #### Installer libpam-pwquality
-      * `$ sudo apt-get install libpam-pwquality` (ou juste apt)
+   * `$ sudo apt-get install libpam-pwquality` (ou juste apt)
 #### Vérifier que c'est bien installé : 
-      * `dpkg -l | grep libpam-pwquality`
+   * `dpkg -l | grep libpam-pwquality`
 #### Appliquer la complexit/
-      * `$ sudo vim /etc/pam.d/common-password`
-        * ÉCRIRE APRÈS password	requisite	pam_pwquality.so retry=3
+   * `$ sudo vim /etc/pam.d/common-password`
+     * ÉCRIRE APRÈS password	requisite	pam_pwquality.so retry=3
 Ajouter les restrictions : | |
 | :---: | --- |
 retry= | No. of consecutive times a user can enter an incorrect password.
