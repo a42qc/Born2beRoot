@@ -198,11 +198,16 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
     `reboot`
 5. Vérifier l’installation
     `dpkg -l | grep sudo`
+6. Voir chapitre 8 pour ajouter username au groupe sudo
+
+### Install Vim
+- `apt install vim`
+- `dpkg -l | grep vim`
 
 ### Configuration
 1. `$ sudo visudo` <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OU Modifier fichier sudoers.d:*** <br/>
-      * `$ sudo vim /etc/sudoers.d/NOMduFICHIER`
+      * `$ sudo vim /etc/sudoers.d/NOMduFICHIER`(if vim you install vim)
 
 #### L’authentification sudo limitée à 3 essais en cas de mot de passe erroné :
    * `Defaults        passwd_tries=3`
@@ -210,7 +215,8 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
    * `Defaults        badpass_message="MESSAGEdERREUR"`
 #### Journal des commandes sudo :
    * `mkdir /var/log/sudo` <br/>
-   * `Defaults        logfile="/var/log/sudo/NOMduFICHIER"`
+   * `touch /var/log/sudo/commandslog` or whatever you want
+   * `Defaults        logfile="/var/log/sudo/commandslog"`
 #### To archive all sudo inputs & outputs to a directory: 
    * `Defaults        log_input,log_output` <br/>
    * `Defaults        iolog_dir="/var/log/sudo"`
@@ -219,8 +225,7 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
 #### Restreindre les paths utilisables par sudo :
    * `Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
 
-
-## Running root-Privileged Commands
+### Running root-Privileged Commands
 [Useful sudoers configurations](https://www.tecmint.com/sudoers-configurations-for-setting-sudo-in-linux/ "tecmint.com"), run root-privileged commands via prefix sudo
 `$ sudo COMMAND`<br/>
 For instance : 
@@ -251,7 +256,7 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 • Cet utilisateur appartiendra aux groupes user42 et sudo.
 
 
-## 3. SSH
+## SSH
 
 La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)
 
@@ -275,15 +280,15 @@ La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/co
 Installer et configurer un [serveur SSH](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr")
 
 ### Changer le port SSH et permissions utilisateur root
-1. Installer Vim
-$ sudo apt install vim
-2. Modifier port SSH
+1. Modifier port SSH
       * Localiser fichier :
         * find / -name "sshd_config" 2>/dev/null
-3. `$ sudo vim /etc/ssh/sshd_config`
-4. Rechercher Port 22 ou #Port 22
+2. `$ sudo vim /etc/ssh/sshd_config`
+3. Rechercher Port 22 ou #Port 22
       * Port SSH par défaut : 22
-5. Remplacer 22 par 4242
+4. Remplacer 22 par 4242
+5. Reboot SSH `sudo systemctl restart sshd`
+6. Vérifier ports ouverts `$ ss -tulw`
 
 ### Permission utilisateur root 
 To disable SSH login as root irregardless of authentication mechanism
@@ -293,14 +298,10 @@ To disable SSH login as root irregardless of authentication mechanism
 3. Rechercher: 
       * "PermitRootLogin" et le mettre à "no"
 Vérifier statut :
-$ `service ssh status` (OU `$ systemctl status ssh`)
+$ `service ssh status` (`$ systemctl status ssh`)
 
-### Vérifier ports ouverts
-   * `$ ss -tulw`
-      
 How to change [ssh port](https://www.cyberciti.biz/faq/howto-change-ssh-port-on-linux-or-unix-server/ "cyberciti.biz")<br/>
 Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr") command
-
 
 ##Firewall : Installation, status et activation d’un port
 
@@ -467,29 +468,15 @@ Minimum number of days between password change	: <PASS_MIN_DAYS>
 Maximum number of days between password change	: <PASS_MAX_DAYS>
 Number of days of warning before password expires	: <PASS_WARN_AGE>
 
-8. Groupe
-Ajouter utilisateurs à un groupe 
-(ex: à sudo et user42)**
-$ sudo adduser USERNAME  GROUP (**ou** usermod -aG sudo USERNAME)
-reboot for changes to take effect
-then log in 
-and verify sudopowers** via sudo -v
-
-Vérifier si l’utilisateur a bien été ajouté au groupe
-$ getent group sudo (**ou** $ dpkg -l | grep GROUP)
-??!? groups USERNAME GROUP
+## 8. Groupes
+### Ajouter utilisateurs à un groupe 
+      - `$ sudo adduser USERNAME  GROUP`
+            - group : sudo, user42
+      - reboot for changes to take effect
+      - verify sudopowers via sudo -v
+      - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo (groups USERNAME GROUP)`
 
 [Supprimer effacer retirer un compte utilisateur](https://linuxhint.com/secure_password_policies_ubuntu/)
-
-
-
-
-
-
-
-
-
-
 Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
 Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
 
