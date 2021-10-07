@@ -286,7 +286,7 @@ Installer et configurer un [serveur SSH](https://www.linuxtricks.fr/wiki/ssh-ins
 2. `$ sudo vim /etc/ssh/sshd_config`
 3. Rechercher Port 22 ou #Port 22
       * Port SSH par défaut : 22
-4. Remplacer 22 par 4242
+4. Remplacer 22 par 4242 80 et 21 (un par ligne)
 5. Reboot SSH `sudo systemctl restart sshd`
 6. Vérifier ports ouverts `$ ss -tulw`
 
@@ -306,8 +306,10 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
 ##Firewall : Installation, status et activation d’un port
 
 ### Installer pare-feu
-1. `$ sudo apt update && sudo apt install ufw`
-2. Vérifier si ufw est bien installé :
+1. `$ sudo apt update && apt upgrade` 
+2. `sudo apt install ufw`
+3. `reboot`
+4. Vérifier si ufw est bien installé :
       * `dpkg -l | grep ufw`
 
 ### Statut du pare-feu et activation d'un port
@@ -319,7 +321,7 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
 
 ## 4. Connection au server via SSH (connection à distance)
 1. Obtenir l'adresse IP
-      * `hostname -I` (i majuscule)
+      * `hostname -I`
 2. Se connecter à partir d'ailleurs
       * Utiliser un second terminal
 3. `ssh NOMd'UTILISATEUR@ADRESSEip -p NUMÉROduPORT`
