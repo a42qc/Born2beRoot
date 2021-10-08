@@ -93,6 +93,10 @@ Storage
 Audio
 1. Uncheck Enable Audio
 
+Network
+1. Attached to : bridged Adapter
+2. Name : en0 : Ethernet
+
 ### III. Debian installation and configuration 
 1. Start VM
 2. DO NOT INSTALL THE GRAPHICAL INTERFACE
