@@ -266,7 +266,7 @@ La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/co
 
 ### Installation openSSH-server
    * `$ sudo apt install openssh-server` <br/>
-   * `reboot`
+   * `sudo reboot`
 #### Vérifier si SSH installé
    * `$ dpkg -l | grep ssh`
 
@@ -382,23 +382,21 @@ virtuelle, compte root inclus.
 Note that the above-configured policy will only apply on the newly created users. To apply this policy to an existing user, use “chage” command.
 
 1. Modifier fichier: 
-    * $ sudo vim /etc /login.defs
+    * $ sudo vim `/etc/login.defs`
 
 - Expiration mot de passe : 
-      * PASS_MAX_DAYS à 30 
+      * `PASS_MAX_DAYS 30` 
 - Nb min de jours avant de pouvoir modifier : 
-      * PASS_MIN_DAYS à 2
+      * `PASS_MIN_DAYS 2`
 - Avertissement x jour avant expiration : 
-      * PASS_WARN_AGE à 7
+      * `PASS_WARN_AGE 7`
 [man login.defs](http://manpages.ubuntu.com/manpages/cosmic/fr/man5/login.defs.5.html#:~:text=Le%20fichier%20%2Fetc%2Flogin.,aura%20probablement%20des%20cons%C3%A9quences%20ind%C3%A9sirables "MANPAGES.UBUNTU.COM")
 
-#### Méthode #2 chage
-
-Expiration applicable sur utilisateurs existants. <br/>
+#### Méthode #2 chage - Expiration applicable sur utilisateurs existants
 Note : To execute the chage command, you must be the owner of the account or have root privilege otherwise, you will not be able to view or modify the expiry policy. <br?>
 <br/>
 To use chage command, syntax is: <br/>
-      * $ chage [options] username
+      * `$ chage [options] username`
 
 ##### To view the current password expiry/aging details, the command is :
    * `$ sudo chage –l USERNAME`
@@ -417,19 +415,19 @@ To use chage command, syntax is: <br/>
    * `dpkg -l | grep libpam-pwquality`
 #### Appliquer la complexit/
    * `$ sudo vim /etc/pam.d/common-password`
-     * ÉCRIRE APRÈS password	requisite	pam_pwquality.so retry=3
+     * ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
 Ajouter les restrictions : | |
 | :---: | --- |
-retry= | No. of consecutive times a user can enter an incorrect password.
-minlen= | Minimum length of password (10 caractères)
-maxrepeat= | To set a maximum of x consecutive identical characters (3)
-difok= | No. of character that can be similar to the old password (7)
-lcredit= | Min No . of lowercase letters
-ucredit= | Min No. of uppercase letters (-1)
-dcredit= | Min No. of digits (-1)
-ocredit= | Min No. of symbols
-reject_username | Rejects the password containing the user name (oui)
-enforce_for_root | Also **enforce the policy for the root user (oui)
+`retry=` | No. of consecutive times a user can enter an incorrect password.
+`minlen=10` | Minimum length of password (10 caractères)
+`maxrepeat=3` | To set a maximum of x consecutive identical characters
+`difok=7` | No. of character that can be similar to the old password
+`lcredit=` | Min No . of lowercase letters
+`ucredit=-1` | Min No. of uppercase letters
+`dcredit=-1` | Min No. of digits
+`ocredit=` | Min No. of symbols
+`reject_username` | Rejects the password containing the user name (oui)
+`enforce_for_root` | Also **enforce the policy for the root user (oui)
 
 ~??? To check if the password contains the user name in some form (enabled if the value is not 0) usercheck=  <br/>
 exemple : password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root <br/>
@@ -451,7 +449,7 @@ How To Set [Password Policies](https://ostechnix.com/how-to-set-password-policie
 3. Now try to enter a password that does not include restrictions.
 
 #### adding a complex password that meets the criteria defined by the password policy
-      * `$ sudo passwd USERNAME`
+      * `$ sudo passwd USERNAME` ou `sudo passwd root`
       * ex: Sup3rCh4ts
 
 How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
