@@ -440,7 +440,7 @@ $ `service ssh status` (`$ systemctl status ssh`)
 How to change [ssh port](https://www.cyberciti.biz/faq/howto-change-ssh-port-on-linux-or-unix-server/ "cyberciti.biz")<br/>
 Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr") command
 
-##Firewall : Installation, status et activation d’un port
+## Firewall : Installation, status et activation d’un port
 
 ### Installer pare-feu
 1. `$ sudo apt update && apt upgrade` 
@@ -456,7 +456,7 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
    - `$ sudo ufw delete allow NUMÉROduPORT`
 
 
-## Connection au server via SSH (connection à distance)
+### Connection au server via SSH (connection à distance)
 1. Obtenir l'adresse IP
       * `hostname -I`
 2. Se connecter à partir d'ailleurs
@@ -467,7 +467,7 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
    * `$ logout` (**ou** `$ exit`)
 
 
-## Hostname - HOW TO FIND IP ADDRESS
+### Hostname - HOW TO FIND IP ADDRESS
 ### Trouver le nom d'hôte
    * `$ hostname`
 ### Configurer
