@@ -235,7 +235,140 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
 For instance : 
 `$ sudo apt update`
 
-## 3. Service SSH, pare-feu et connection à distance
+
+## 3. Utilisateurs
+### Créer un nouvel utilisateur
+      * `$ sudo adduser <username>`
+### Vérifier si l’utilisateur a bien été ajouté
+      * `$ getent passwd USERNAME`
+### Vérifier l’expiration le mot de passe de l'utilisateur nouvellement créé
+      * `$ sudo chage -l USERNAME`
+
+Last password change					: <last-password-change-date>
+Password expires			: <last-password-change-date + PASS_MAX_DAYS>
+Password inactive						: never
+Account expires						: never
+Minimum number of days between password change	: <PASS_MIN_DAYS>
+Maximum number of days between password change	: <PASS_MAX_DAYS>
+Number of days of warning before password expires	: <PASS_WARN_AGE>
+
+## 4. Groupes
+### Ajouter utilisateurs à un groupe 
+      - `$ sudo adduser USERNAME  GROUP`
+            - group : sudo, user42
+      - reboot for changes to take effect
+      - verify sudopowers via sudo -v
+      - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo (groups USERNAME GROUP)`
+
+[Supprimer effacer retirer un compte utilisateur](https://linuxhint.com/secure_password_policies_ubuntu/)
+Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
+Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
+
+
+## 5. Politique de mot de passe fort
+Tâches
+Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
+
+• Votre mot de passe devra expirer tous les 30 jours.
+
+• Le nombre minimum de jours avant de pouvoir modifier un mot de passe sera configuré à 2.
+
+• L’utilisateur devra recevoir un avertissement 7 jours avant que son mot de passe n’expire.
+
+• Votre mot de passe sera de 10 caractères minimums dont une majuscule et un chiffre, et ne devra pas comporter plus de 3 caractères identiques consécutifs.
+
+• Le mot de passe ne devra pas comporter le nom de l’utilisateur.
+
+• Le mot de passe devra comporter au moins 7 caractères qui ne sont pas présents dans l’ancien mot de passe.
+
+• Bien entendu votre mot de passe root devra suivre cette politique.
+
+Après avoir mis en place vos fichiers de configuration, il faudra
+changer tous les mots de passe des comptes présents sur la machine
+virtuelle, compte root inclus.
+
+
+
+
+### Expiration (password age)
+#### Méthode #1 login.defs
+Note that the above-configured policy will only apply on the newly created users. To apply this policy to an existing user, use “chage” command.
+
+1. Modifier fichier: 
+    * $ sudo vim `/etc/login.defs`
+
+- Expiration mot de passe : 
+      * `PASS_MAX_DAYS 30` 
+- Nb min de jours avant de pouvoir modifier : 
+      * `PASS_MIN_DAYS 2`
+- Avertissement x jour avant expiration : 
+      * `PASS_WARN_AGE 7`
+[man login.defs](http://manpages.ubuntu.com/manpages/cosmic/fr/man5/login.defs.5.html#:~:text=Le%20fichier%20%2Fetc%2Flogin.,aura%20probablement%20des%20cons%C3%A9quences%20ind%C3%A9sirables "MANPAGES.UBUNTU.COM")
+
+#### Méthode #2 chage - Expiration applicable sur utilisateurs existants
+Note : To execute the chage command, you must be the owner of the account or have root privilege otherwise, you will not be able to view or modify the expiry policy. <br?>
+<br/>
+To use chage command, syntax is: <br/>
+      * `$ chage [options] username`
+
+##### To view the current password expiry/aging details, the command is :
+   * `$ sudo chage –l USERNAME`
+##### To configure the maximum No. of days after which a user should change the password.
+   * `$ sudo chage -M <No./_of_days> <user_name>`
+##### To configure the minimum No. of days required between the change of password.
+   * `$ sudo chage -m <No._of_days> <user_name>`
+##### To configure warning prior to password expiration :
+   * `$ sudo chage -W <No._of_days> <user_name>`
+
+
+### Complexité (password strength) pam.d
+#### Installer libpam-pwquality
+   * `$ sudo apt-get install libpam-pwquality` (ou juste apt)
+#### Vérifier que c'est bien installé : 
+   * `dpkg -l | grep libpam-pwquality`
+#### Appliquer la complexit/
+   * `$ sudo vim /etc/pam.d/common-password`
+     * ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
+Ajouter les restrictions : | |
+| :---: | --- |
+`retry=` | No. of consecutive times a user can enter an incorrect password.
+`minlen=10` | Minimum length of password (10 caractères)
+`maxrepeat=3` | To set a maximum of x consecutive identical characters
+`difok=7` | No. of character that can be similar to the old password
+`lcredit=` | Min No . of lowercase letters
+`ucredit=-1` | Min No. of uppercase letters
+`dcredit=-1` | Min No. of digits
+`ocredit=` | Min No. of symbols
+`reject_username` | Rejects the password containing the user name (oui)
+`enforce_for_root` | Also **enforce the policy for the root user (oui)
+
+~??? To check if the password contains the user name in some form (enabled if the value is not 0) usercheck=  <br/>
+exemple : password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root <br/>
+Now reboot the system to apply the changes in the password policy.
+
+
+How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
+How to [enforce password complexity](https://www.networkworld.com/article/2726217/how-to-enforce-password-complexity-on-linux.html)
+How To Set [Password Policies](https://ostechnix.com/how-to-set-password-policies-in-linux/)
+[login.defs](http://manpages.ubuntu.com/manpages/bionic/fr/man5/login.defs.5.html) - configuration de la suite des mots de passe cachés « shadow password »
+
+### Tester et changer tous les mots de passe des utilisateurs, compte root compris.
+#### To view the current password expiry/aging details
+      * `$ sudo chage –l username`
+
+#### Test the secure password policy
+1. Run this command to add a user: `$ sudo useradd  testuser`
+2. Then set a password: `$ sudo passwd testuser`
+3. Now try to enter a password that does not include restrictions.
+
+#### adding a complex password that meets the criteria defined by the password policy
+      * `$ sudo passwd USERNAME` ou `sudo passwd root`
+      * ex: Sup3rCh4ts
+
+How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
+
+
+## 6. Service SSH, pare-feu et connection à distance
 
 Un service SSH sera actif sur le port 4242 uniquement. Pour des questions de sécurité, on ne devrait pas pouvoir se connecter par SSH avec l’utilisateur root.
 
@@ -351,141 +484,6 @@ Edit the file `/etc/hosts: vi /etc/hosts` <br/>
 Run command: `/etc/init. d/hostname. sh start` <br/>
 
 [Change hostname](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/ "cyberciti.biz") command
-
-## 6. Politique de mot de passe fort
-Tâches
-Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
-
-• Votre mot de passe devra expirer tous les 30 jours.
-
-• Le nombre minimum de jours avant de pouvoir modifier un mot de passe sera configuré à 2.
-
-• L’utilisateur devra recevoir un avertissement 7 jours avant que son mot de passe n’expire.
-
-• Votre mot de passe sera de 10 caractères minimums dont une majuscule et un chiffre, et ne devra pas comporter plus de 3 caractères identiques consécutifs.
-
-• Le mot de passe ne devra pas comporter le nom de l’utilisateur.
-
-• Le mot de passe devra comporter au moins 7 caractères qui ne sont pas présents dans l’ancien mot de passe.
-
-• Bien entendu votre mot de passe root devra suivre cette politique.
-
-Après avoir mis en place vos fichiers de configuration, il faudra
-changer tous les mots de passe des comptes présents sur la machine
-virtuelle, compte root inclus.
-
-
-
-
-### Expiration (password age)
-#### Méthode #1 login.defs
-Note that the above-configured policy will only apply on the newly created users. To apply this policy to an existing user, use “chage” command.
-
-1. Modifier fichier: 
-    * $ sudo vim `/etc/login.defs`
-
-- Expiration mot de passe : 
-      * `PASS_MAX_DAYS 30` 
-- Nb min de jours avant de pouvoir modifier : 
-      * `PASS_MIN_DAYS 2`
-- Avertissement x jour avant expiration : 
-      * `PASS_WARN_AGE 7`
-[man login.defs](http://manpages.ubuntu.com/manpages/cosmic/fr/man5/login.defs.5.html#:~:text=Le%20fichier%20%2Fetc%2Flogin.,aura%20probablement%20des%20cons%C3%A9quences%20ind%C3%A9sirables "MANPAGES.UBUNTU.COM")
-
-#### Méthode #2 chage - Expiration applicable sur utilisateurs existants
-Note : To execute the chage command, you must be the owner of the account or have root privilege otherwise, you will not be able to view or modify the expiry policy. <br?>
-<br/>
-To use chage command, syntax is: <br/>
-      * `$ chage [options] username`
-
-##### To view the current password expiry/aging details, the command is :
-   * `$ sudo chage –l USERNAME`
-##### To configure the maximum No. of days after which a user should change the password.
-   * `$ sudo chage -M <No./_of_days> <user_name>`
-##### To configure the minimum No. of days required between the change of password.
-   * `$ sudo chage -m <No._of_days> <user_name>`
-##### To configure warning prior to password expiration :
-   * `$ sudo chage -W <No._of_days> <user_name>`
-
-
-### Complexité (password strength) pam.d
-#### Installer libpam-pwquality
-   * `$ sudo apt-get install libpam-pwquality` (ou juste apt)
-#### Vérifier que c'est bien installé : 
-   * `dpkg -l | grep libpam-pwquality`
-#### Appliquer la complexit/
-   * `$ sudo vim /etc/pam.d/common-password`
-     * ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
-Ajouter les restrictions : | |
-| :---: | --- |
-`retry=` | No. of consecutive times a user can enter an incorrect password.
-`minlen=10` | Minimum length of password (10 caractères)
-`maxrepeat=3` | To set a maximum of x consecutive identical characters
-`difok=7` | No. of character that can be similar to the old password
-`lcredit=` | Min No . of lowercase letters
-`ucredit=-1` | Min No. of uppercase letters
-`dcredit=-1` | Min No. of digits
-`ocredit=` | Min No. of symbols
-`reject_username` | Rejects the password containing the user name (oui)
-`enforce_for_root` | Also **enforce the policy for the root user (oui)
-
-~??? To check if the password contains the user name in some form (enabled if the value is not 0) usercheck=  <br/>
-exemple : password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root <br/>
-Now reboot the system to apply the changes in the password policy.
-
-
-How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
-How to [enforce password complexity](https://www.networkworld.com/article/2726217/how-to-enforce-password-complexity-on-linux.html)
-How To Set [Password Policies](https://ostechnix.com/how-to-set-password-policies-in-linux/)
-[login.defs](http://manpages.ubuntu.com/manpages/bionic/fr/man5/login.defs.5.html) - configuration de la suite des mots de passe cachés « shadow password »
-
-### Tester et changer tous les mots de passe des utilisateurs, compte root compris.
-#### To view the current password expiry/aging details
-      * `$ sudo chage –l username`
-
-#### Test the secure password policy
-1. Run this command to add a user: `$ sudo useradd  testuser`
-2. Then set a password: `$ sudo passwd testuser`
-3. Now try to enter a password that does not include restrictions.
-
-#### adding a complex password that meets the criteria defined by the password policy
-      * `$ sudo passwd USERNAME` ou `sudo passwd root`
-      * ex: Sup3rCh4ts
-
-How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
-
-
-
-## 7. Utilisateurs
-### Créer un nouvel utilisateur
-      * `$ sudo adduser <username>`
-### Vérifier si l’utilisateur a bien été ajouté
-      * `$ getent passwd USERNAME`
-### Vérifier l’expiration le mot de passe de l'utilisateur nouvellement créé
-      * `$ sudo chage -l USERNAME`
-
-Last password change					: <last-password-change-date>
-Password expires			: <last-password-change-date + PASS_MAX_DAYS>
-Password inactive						: never
-Account expires						: never
-Minimum number of days between password change	: <PASS_MIN_DAYS>
-Maximum number of days between password change	: <PASS_MAX_DAYS>
-Number of days of warning before password expires	: <PASS_WARN_AGE>
-
-## 8. Groupes
-### Ajouter utilisateurs à un groupe 
-      - `$ sudo adduser USERNAME  GROUP`
-            - group : sudo, user42
-      - reboot for changes to take effect
-      - verify sudopowers via sudo -v
-      - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo (groups USERNAME GROUP)`
-
-[Supprimer effacer retirer un compte utilisateur](https://linuxhint.com/secure_password_policies_ubuntu/)
-Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
-Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
-
-
-
 
 
 
