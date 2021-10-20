@@ -189,7 +189,7 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
 2. Use lsblk command inside the terminal
 
 
-## 2. Configuration stricte du groupe sudo
+## 3. Configuration stricte du groupe sudo
 
 ### I. Installation et utilisation
 1. Se connecter à l'utilisateur root
@@ -236,7 +236,7 @@ For instance :
 `$ sudo apt update`
 
 
-## 3. Utilisateurs
+## 4. Utilisateurs
 ### Créer un nouvel utilisateur
       * `$ sudo adduser <username>`
 ### Vérifier si l’utilisateur a bien été ajouté
@@ -252,7 +252,7 @@ Minimum number of days between password change	: <PASS_MIN_DAYS>
 Maximum number of days between password change	: <PASS_MAX_DAYS>
 Number of days of warning before password expires	: <PASS_WARN_AGE>
 
-## 4. Groupes
+## 5. Groupes
 ### Ajouter utilisateurs à un groupe 
       - `$ sudo adduser USERNAME  GROUP`
             - group : sudo, user42
@@ -265,7 +265,7 @@ Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debute
 Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
 
 
-## 5. Politique de mot de passe fort
+## 6. Politique de mot de passe fort
 Tâches
 Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
 
@@ -368,7 +368,7 @@ How To Set [Password Policies](https://ostechnix.com/how-to-set-password-policie
 How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
 
 
-## 6. Service SSH, pare-feu et connection à distance
+## 7. Service SSH, pare-feu et connection à distance
 
 Un service SSH sera actif sur le port 4242 uniquement. Pour des questions de sécurité, on ne devrait pas pouvoir se connecter par SSH avec l’utilisateur root.
 
@@ -456,7 +456,7 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
    - `$ sudo ufw delete allow NUMÉROduPORT`
 
 
-## 4. Connection au server via SSH (connection à distance)
+## Connection au server via SSH (connection à distance)
 1. Obtenir l'adresse IP
       * `hostname -I`
 2. Se connecter à partir d'ailleurs
@@ -467,7 +467,7 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
    * `$ logout` (**ou** `$ exit`)
 
 
-## 5. Hostname
+## Hostname - HOW TO FIND IP ADDRESS
 ### Trouver le nom d'hôte
    * `$ hostname`
 ### Configurer
