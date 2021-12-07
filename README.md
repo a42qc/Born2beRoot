@@ -104,7 +104,7 @@ Network
    - Language : English
    - Country : Canada
    - Keymap : Canadian Multilingual
-   - Hostname : 42 username
+   - Hostname : username42
    - Root password : UTh1nkImStup1d?
    - Full name of the new user : your name dude
    - Username for your account : same thing or something else
@@ -186,87 +186,13 @@ var-log (un seul tiret) max (finish) | Ext4 journaling file system | ENTER MANUA
 ### IV. Vérifier partitionnage
 
 1. Start the VM
-2. Use lsblk command inside the terminal
+2. Use 'lsblk' command inside the terminal
 
 
-## 3. Configuration stricte du groupe sudo
+# Configuration de la VM
 
-### I. Installation et utilisation
-1. Se connecter à l'utilisateur root
-    `$ su -`
-2. Update et upgrade
-    `$ apt update && apt upgrade`
-3. Installer sudo
-    `$ apt install sudo`
-4. Redémarrer
-    `reboot`
-5. Vérifier l’installation
-    `dpkg -l | grep sudo`
-6. Voir chapitre 8 pour ajouter username au groupe sudo
-
-### Install Vim
-- `apt install vim`
-- `dpkg -l | grep vim`
-
-### Configuration
-1. `$ sudo visudo` <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OU Modifier fichier sudoers.d:*** <br/>
-      * `$ sudo vim /etc/sudoers.d/NOMduFICHIER`(if vim you install vim)
-
-#### L’authentification sudo limitée à 3 essais en cas de mot de passe erroné :
-   * `Defaults        passwd_tries=3`
-#### Message d'erreur en cas de mot de passe erroné :
-   * `Defaults        badpass_message="MESSAGEdERREUR"`
-#### Journal des commandes sudo :
-   * `mkdir /var/log/sudo` <br/>
-   * `touch /var/log/sudo/commandslog` or whatever you want
-   * `Defaults        logfile="/var/log/sudo/commandslog"`
-#### To archive all sudo inputs & outputs to a directory: 
-   * `Defaults        log_input,log_output` <br/>
-   * `Defaults        iolog_dir="/var/log/sudo"`
-#### Activation du mode TTY :
-   * `Defaults        requiretty`
-#### Restreindre les paths utilisables par sudo :
-   * `Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
-
-### Running root-Privileged Commands
-[Useful sudoers configurations](https://www.tecmint.com/sudoers-configurations-for-setting-sudo-in-linux/ "tecmint.com"), run root-privileged commands via prefix sudo
-`$ sudo COMMAND`<br/>
-For instance : 
-`$ sudo apt update`
-
-
-## 4. Utilisateurs
-### Créer un nouvel utilisateur
-      * `$ sudo adduser <username>`
-### Vérifier si l’utilisateur a bien été ajouté
-      * `$ getent passwd USERNAME`
-### Vérifier l’expiration le mot de passe de l'utilisateur nouvellement créé
-      * `$ sudo chage -l USERNAME`
-
-Last password change					: <last-password-change-date>
-Password expires			: <last-password-change-date + PASS_MAX_DAYS>
-Password inactive						: never
-Account expires						: never
-Minimum number of days between password change	: <PASS_MIN_DAYS>
-Maximum number of days between password change	: <PASS_MAX_DAYS>
-Number of days of warning before password expires	: <PASS_WARN_AGE>
-
-## 5. Groupes
-### Ajouter utilisateurs à un groupe 
-      - `$ sudo adduser USERNAME  GROUP`
-            - group : sudo, user42
-      - reboot for changes to take effect
-      - verify sudopowers via sudo -v
-      - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo (groups USERNAME GROUP)`
-
-[Supprimer effacer retirer un compte utilisateur](https://linuxhint.com/secure_password_policies_ubuntu/)
-Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
-Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
-
-
-## 6. Politique de mot de passe fort
-Tâches
+## 1. Politique de mot de passe fort
+'''
 Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
 
 • Votre mot de passe devra expirer tous les 30 jours.
@@ -286,16 +212,14 @@ Pour mettre en place une politique de mot de passe fort, il faudra remplir les c
 Après avoir mis en place vos fichiers de configuration, il faudra
 changer tous les mots de passe des comptes présents sur la machine
 virtuelle, compte root inclus.
-
-
-
+'''
 
 ### Expiration (password age)
 #### Méthode #1 login.defs
 Note that the above-configured policy will only apply on the newly created users. To apply this policy to an existing user, use “chage” command.
 
 1. Modifier fichier: 
-    * $ sudo vim `/etc/login.defs`
+    * 'sudo vim /etc/login.defs`
 
 - Expiration mot de passe : 
       * `PASS_MAX_DAYS 30` 
@@ -319,19 +243,20 @@ To use chage command, syntax is: <br/>
    * `$ sudo chage -m <No._of_days> <user_name>`
 ##### To configure warning prior to password expiration :
    * `$ sudo chage -W <No._of_days> <user_name>`
+exemple : chage -M 30 -m 2 -W 7 USERNAME
 
 
 ### Complexité (password strength) pam.d
-#### Installer libpam-pwquality
-   * `$ sudo apt-get install libpam-pwquality` (ou juste apt)
-#### Vérifier que c'est bien installé : 
+#### I. Installer libpam-pwquality
+   * `$ sudo apt install libpam-pwquality` (ou 'apt-get')
+#### II. Vérifier que c'est bien installé : 
    * `dpkg -l | grep libpam-pwquality`
-#### Appliquer la complexit/
+#### III. Appliquer la complexit/
    * `$ sudo vim /etc/pam.d/common-password`
      * ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
 Ajouter les restrictions : | |
 | :---: | --- |
-`retry=` | No. of consecutive times a user can enter an incorrect password.
+`retry=3` | No. of consecutive times a user can enter an incorrect password.
 `minlen=10` | Minimum length of password (10 caractères)
 `maxrepeat=3` | To set a maximum of x consecutive identical characters
 `difok=7` | No. of character that can be similar to the old password
@@ -354,22 +279,113 @@ How To Set [Password Policies](https://ostechnix.com/how-to-set-password-policie
 
 ### Tester et changer tous les mots de passe des utilisateurs, compte root compris.
 #### To view the current password expiry/aging details
-      * `$ sudo chage –l username`
+      * `sudo chage –l username`
 
 #### Test the secure password policy
-1. Run this command to add a user: `$ sudo useradd  testuser`
+1. Run this command to add a user: `sudo useradd  testuser`
 2. Then set a password: `$ sudo passwd testuser`
 3. Now try to enter a password that does not include restrictions.
 
 #### adding a complex password that meets the criteria defined by the password policy
-      * `$ sudo passwd USERNAME` ou `sudo passwd root`
-      * ex: Sup3rCh4ts
+      * `sudo passwd USERNAME`
+      * ex: Sup3rP4ssw0rd! (non c'est pas ça pour vrai)
 
 How to [enable and enforce secure password policies](https://linuxhint.com/secure_password_policies_ubuntu/)
 
+## 2. Configuration stricte du groupe sudo
 
-## 7. Service SSH, pare-feu et connection à distance
+### I. Installation de sudo
+1. Se connecter à l'utilisateur root
+    `$ su -`
+2. Update et upgrade
+    `$ apt update && apt upgrade`
+3. Installer sudo
+    `$ apt install sudo`
+4. Redémarrer
+    `reboot`
+5. Vérifier l’installation
+    `dpkg -l | grep sudo`
+6. Voir chapitre 6 pour créer utilisateurs et 4 pour ajouter utilisateurs au groupe sudo
 
+### II. Install Vim (pas obligatoire)
+- `apt install vim`
+- `dpkg -l | grep vim`
+
+### III. Configuration de sudo pour utilisateurs
+1. `$ sudo visudo` <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OU Modifier fichier sudoers.d:*** <br/>
+      * `$ sudo vim /etc/sudoers.d/FileName'
+
+#### L’authentification sudo limitée à 3 essais en cas de mot de passe erroné :
+   * `Defaults        passwd_tries=3`
+#### Message d'erreur en cas de mot de passe erroné :
+   * `Defaults        badpass_message="MESSAGEdERREUR"`
+#### Journal des commandes sudo :
+   * `mkdir /var/log/sudo` <br/>
+   * `touch /var/log/sudo/commandslog` or whatever you want
+   * `Defaults        logfile="/var/log/sudo/commandslog"`
+#### To archive all sudo inputs & outputs to a directory: 
+   * `Defaults        log_input,log_output` <br/>
+   * `Defaults        iolog_dir="/var/log/sudo"`
+#### Activation du mode TTY :
+   * `Defaults        requiretty`
+#### Restreindre les paths utilisables par sudo :
+   * `Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
+
+### IV. Running root-Privileged Commands
+[Useful sudoers configurations](https://www.tecmint.com/sudoers-configurations-for-setting-sudo-in-linux/ "tecmint.com"), run root-privileged commands via prefix sudo
+`$ sudo COMMAND`<br/>
+By exemple : 
+`$ sudo apt update`
+
+## 3. Hostname - HOW TO FIND IP ADDRESS
+### Trouver le nom d'hôte
+   * `$ hostname`
+### Configurer
+1. Modifier nom : 
+      * `$ sudo vim /etc/hostname`
+2. Modifier nom : 
+      * `$ sudo vim /etc/hosts`
+      * `$ reboot`
+### Login to your server: 
+      * `ssh user@server-name.`
+Become a root user: `sudo -s or su -` <br/>
+Edit the file `/etc/hostname: vim /etc/hostname` <br/>
+Edit the file `/etc/hosts: vim /etc/hosts` <br/>
+Run command: `/etc/init.d/hostname. sh start` <br/>
+[Change hostname](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/ "cyberciti.biz") command
+
+## 4. Groupes
+### I. Create group
+      - 'sudo groupadd USERNAME'
+### II. Ajouter utilisateurs à un groupe 
+      - `sudo adduser USERNAME  GROUP`
+            - group : sudo, user42
+      - 'reboot' for changes to take effect
+      - verify sudopowers via 'sudo -v' 'sudo -l' This will list any sudo privileges you have. 'sudo whoami'
+      - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo` ('groups USERNAME GROUP')
+
+## 5. Utilisateurs
+### I. Créer un nouvel utilisateur
+      * `$ sudo adduser <username>`
+### II. Vérifier si l’utilisateur a bien été ajouté
+      * `$ getent passwd USERNAME`
+### III. Vérifier l’expiration le mot de passe de l'utilisateur nouvellement créé
+      * `$ sudo chage -l USERNAME`
+
+Last password change					: <last-password-change-date>
+Password expires			                  : <last-password-change-date + PASS_MAX_DAYS>
+Password inactive						: never
+Account expires						: never
+Minimum number of days between password change	: <PASS_MIN_DAYS>
+Maximum number of days between password change	: <PASS_MAX_DAYS>
+Number of days of warning before password expires	: <PASS_WARN_AGE>
+
+[Supprimer effacer retirer un compte utilisateur](https://linuxhint.com/secure_password_policies_ubuntu/)
+[Créer groupe sudo](https://linuxize.com/post/how-to-create-groups-in-linux/)
+
+## 6. Service SSH, pare-feu et connection à distance
+'''
 Un service SSH sera actif sur le port 4242 uniquement. Pour des questions de sécurité, on ne devrait pas pouvoir se connecter par SSH avec l’utilisateur root.
 
 L’utilisation de SSH sera testée durant la soutenance par la mise en
@@ -391,8 +407,22 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 • Un utilisateur sera présent avec pour nom votre login en plus de l’utilisateur root.
 
 • Cet utilisateur appartiendra aux groupes user42 et sudo.
+'''
 
+## Firewall : Installation, status et activation d’un port
 
+### Installer pare-feu
+1. `sudo apt update && apt upgrade` 
+2. `sudo apt install ufw`
+3. `reboot`
+4. Vérifier si ufw est bien installé :
+      * `dpkg -l | grep ufw`
+### Statut du pare-feu et activation d'un port
+   - `sudo ufw status`
+   - `sudo ufw enable`
+   - `sudo ufw allow NUMÉROduPORT` (ici, on veut 4242, 80(http) et 21(FTP))
+   - `sudo ufw delete allow NUMÉROduPORT`      
+      
 ## SSH
 
 La connexion sécurisée à distance avec [SSH](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/41773-la-connexion-securisee-a-distance-avec-ssh)
@@ -419,8 +449,8 @@ Installer et configurer un [serveur SSH](https://www.linuxtricks.fr/wiki/ssh-ins
 ### Changer le port SSH et permissions utilisateur root
 1. Modifier port SSH
       * Localiser fichier :
-        * find / -name "sshd_config" 2>/dev/null
-2. `$ sudo vim /etc/ssh/sshd_config`
+        * 'find / -name "sshd_config" 2>/dev/null'
+2. `sudo vim /usr/share/openssh/sshd_config` et 'sudo vim /etc/ssh/sshd_config'
 3. Rechercher Port 22 ou #Port 22
       * Port SSH par défaut : 22
 4. Remplacer 22 par 4242 80 et 21 (un par ligne)
@@ -431,30 +461,15 @@ Installer et configurer un [serveur SSH](https://www.linuxtricks.fr/wiki/ssh-ins
 To disable SSH login as root irregardless of authentication mechanism
 1. Localiser fichier :
       * `find / -name "sshd_config" 2>/dev/null`
-2. `$ sudo vim /etc/ssh/sshd_config`
+2. `$ sudo vim /usr/share/openssh/sshd_config`
 3. Rechercher: 
       * "PermitRootLogin" et le mettre à "no"
+4. 'reboot'
 Vérifier statut :
 $ `service ssh status` (`$ systemctl status ssh`)
 
 How to change [ssh port](https://www.cyberciti.biz/faq/howto-change-ssh-port-on-linux-or-unix-server/ "cyberciti.biz")<br/>
 Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-configurer-un-serveur-ssh "linuxtricks.fr") command
-
-## Firewall : Installation, status et activation d’un port
-
-### Installer pare-feu
-1. `$ sudo apt update && apt upgrade` 
-2. `sudo apt install ufw`
-3. `reboot`
-4. Vérifier si ufw est bien installé :
-      * `dpkg -l | grep ufw`
-
-### Statut du pare-feu et activation d'un port
-   - `$ sudo ufw status`
-   - `$ sudo ufw enable`
-   - `$ sudo ufw allow NUMÉROduPORT` (ici, on veut 4242, 80(http) et 21(FTP))
-   - `$ sudo ufw delete allow NUMÉROduPORT`
-
 
 ### Connection au server via SSH (connection à distance)
 1. Obtenir l'adresse IP
@@ -467,24 +482,10 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
    * `$ logout` (**ou** `$ exit`)
 
 
-### Hostname - HOW TO FIND IP ADDRESS
-### Trouver le nom d'hôte
-   * `$ hostname`
-### Configurer
-1. Modifier nom dans : 
-      * `$ sudo vim /etc/hostname`
-2. Modifier nom : 
-      * `$ sudo vim /etc/hosts`
-      * `$ reboot`
-###Login to your server: 
-      * `ssh user@server-name.`
-Become a root user: `sudo -s or su -` <br/>
-Edit the file `/etc/hostname: vi /etc/hostname` <br/>
-Edit the file `/etc/hosts: vi /etc/hosts` <br/>
-Run command: `/etc/init. d/hostname. sh start` <br/>
 
-[Change hostname](https://www.cyberciti.biz/faq/ubuntu-change-hostname-command/ "cyberciti.biz") command
-
+  
+Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
+Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
 
 
 
