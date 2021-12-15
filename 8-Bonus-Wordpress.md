@@ -26,6 +26,7 @@ systemctl enable lighttpd
 systemctl status lighttpd (check status)
 ```
 
+
 ## Installation et configuration Wordpress
 <a href="https://www.osradar.com/install-wordpress-with-lighttpd-debian-10/">lien du tuto</a>
 
