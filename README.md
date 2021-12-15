@@ -364,6 +364,8 @@ Run command: `/etc/init.d/hostname. sh start` <br/>
       - 'reboot' for changes to take effect
       - verify sudopowers via 'sudo -v' 'sudo -l' This will list any sudo privileges you have. 'sudo whoami'
       - Vérifier si l’utilisateur a bien été ajouté au groupe `$ getent group sudo` ('groups USERNAME GROUP')
+(sudo groups USERNAME) mchampag comme utilisateur
+
 
 ## 5. Utilisateurs
 ### I. Créer un nouvel utilisateur
@@ -487,5 +489,9 @@ Check if [port is in use](https://www.linuxtricks.fr/wiki/ssh-installer-et-confi
 Rédiger des [scripts](https://debian-facile.org/doc:programmation:shells:debuter-avec-les-scripts-shell-bash "debian-facile.org") sous bash
 Introduction aux [scripts](https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux/42867-introduction-aux-scripts-shell "openclassroom.com") shell
 
-
+      
+      
+shasum Born2beRoot.vdi > signature.txt
+cat signature.txt
+a246db49c0c1abbbc6c8c164a8b2999a630bec36  Born2beRoot.vdi
 
