@@ -8,15 +8,17 @@
 
 ## I. Création disque dur virtuel
 Tools -> New
-      - Name : Born2beRoot
-      - Machine Folder : the/path/I/want (/sgoinfre/perso/username/folder)
-      - Type : Linux
-      - Version : Debian (64-bit)
-      - Memory size : 1024 MB
-      - Create a virtual hard disk now
-      - VDI (VirtualBow Disk Image)
-      - Dynamically allocated
-      - 30.80 GB (even if inGio)
+|||
+| --- | --- |
+- Name : Born2beRoot
+- Machine Folder : the/path/I/want (/sgoinfre/perso/username/folder)
+- Type : Linux
+- Version : Debian (64-bit)
+- Memory size : 1024 MB
+- Create a virtual hard disk now
+- VDI (VirtualBow Disk Image)
+- Dynamically allocated
+- 30.80 GB (even if inGio)
 
 ### II. Properties
 Settings
