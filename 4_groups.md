@@ -4,7 +4,7 @@
 
 |                       |                                |
 | --------------------- | ------------------------------ |
-| How to create a group | `$ sudo groupadd USERNAME`
+| How to create a group | `$ sudo groupadd GROUPNAME`
 
 
 ## II. Add users to groups
