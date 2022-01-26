@@ -57,97 +57,125 @@
 3. Connect with a user (must not be root).
 
 4. Pay attention to the password chosen, it must follow the rules imposed :
-  - .....
+  ```
+  • Expiration : 30 days
+  • Minimum 2 days before be able to modify
+  • Expiration warning : 7 days
+  • Minimum 10 characters with a majuscule and a number. But not more than 3 consecutive identical characters.
+  • Username is forbidden
+  • At least 7 characters that aren't in the last password.
+  • Same thing for root password
+  • Don't forget to change existing passwords
+  ```
+  
 5. Check that the UFW service is started :
-  - .....
+    - `$ sudo ufw status`
+
 6. Check that the SSH service is started :
-  - .....
+    - `$ sudo systemctl status sshd`
+
 7. Check that the chosen operating system is Debian :
-  - .....
+    - `$ uname -o`
 
 
 ## USER
 
 1. Needs a user with the login of the evaluated student that belongs to "sudo" and "user42" groups.
-
+    - `$ groups USERNAME`
+  
 2. Check password policy
+    - How to do that ? 
+    - Create a new user and assign it a password respecting the subject rules.
+      - `$ sudo adduser USERNAME` 
+    - Explain how to set up the rules (should be one or two modified files).
+      - [Password policy](https://github.com/a42qc/Born2beRoot/blob/master/1_password_policy.md)
+      - `$ sudo chage -l USERNAME` Verify password expiration
 
-  - How to do that ?
-  - Create a new user and assign it a password respecting the subject rules.
- 
-#### How to create a new user: 
-|                                  |                                        |
-| -------------------------------- | -------------------------------------- |
-| `$ sudo adduser USERNAME`        | Creates a new username
-| `$ sudo chage -l USERNAME`       | Verify password expiration
-| `$ sudo adduser USERNAME sudo`   | Assign user to sudo
-| `$ sudo adduser USERNAME user42` | Assign user to user42
-
-  - Explain how to set up the rules (should be one or two modified files).
 3. Create a group named "evaluating", assign it to this user and check that this user belongs to the "evaluating" group.
+    - `$ sudo groupadd evaluating`
+    - `$ sudo adduser USERNAME evaluating` 
+    - `$ groups USERNAME`
+  
 4. Explain the advantages of this password policy, as well as the advantages and disadvanteages of its implementation.
+    - Advantages: Better security
+    - Disadvanteages: Need to remember a newpassword every mounth, need to change password after modified the restrictions.
 
 
 ## HOSTNAME AND PARTITIONS
 
 1. Check that the hostname of the machine is correctly formatted as follow : login42 (longin of the student evaluated)
-  - `$ hostname`
+    - `$ hostname`
 2. Modify this hostname by replacing the login with yours, then restart the machine. If on restart, the hostname has not been updated, the evaluation stops here.
-
+    - Modify hostname: `$ sudo vim /etc/hostname`
+    - Modify hostname: `$ sudo vim /etc/hosts`
+    - `$ reboot`
 3. Restore the machine to the original hostname
-
+    - See 2.
 4. Check the partitions and compare to the bonus example.
-  - `$ lsblk`
+    - `$ lsblk`
 5. Explain how LVM works ans what it is all about.
+   - device mapper framework that provides Logical Volume Manager for the linux kernel / gestionnaire de volumes logiques pour le noyau Linux. 
+   - Les volumes logiques (LV): ce sont des «partitions virtuelles» (logiques parce qu'elles sont produites par un logiciel                                              sans forcément correspondre à une portion  d'un disque matériel. Les volumes logiques sont constitués d'étendues                                                    de blocs physiques réunis en un seul espace de stockage, et rendus lisibles par le système. On peut les utiliser                                                    comme des partitions ordinaires.
 
 
 ## SUDO
 
 1. Check that the "sudo" program is properly installed on the VM.
-
+    - `$ dpkg -l | grep sudo`
 2. Assign new user to the "sudo" group.
-
+    - `$ sudo adduser USERNAME sudo` 
 3. Explain the value and operation of sudo with an exemple
-
+    - is a program for Unix-like computer operating systems that enables users to run programs                                                                           with the security privileges of another user, by default the superuser.
+    - `$ sudo COMMAND`
 4. Show the implementation of the rules imposed by the subject
-  - Verifify that the `/var/log/sudo` folder exist and has at least one file. 
-  - Check the contents of the files in this folder. You should see a history of the commands used with sudo.
-  - Try to run a command via sudo. See if the file(s) in the `/var/log/sudo` folder have been updated.
+    - Verifify that the `/var/log/sudo` folder exist and has at least one file. 
+    - Check the contents of the files in this folder. You should see a history of the commands used with sudo.
+    - Try to run a command via sudo. See if the file(s) in the `/var/log/sudo` folder have been updated.
 
 
 ## UFW
 
 1. Check that the "UFW" program is properly installed
-
+    - `$ dpkg -l | grep UFW`
 2. Check that it is working properly
-
+    - `$ sudo ufw status`
 3. Explain basically what UFW is and the value of using it.
-
+    - Very simple and effective firewall
+    - Firewall is a set of software filters that controls (allow or not open ports) incoming and outgoings traffic in your computer.                                     In simple words, it is a sort of wall between your computer and the outside world.
 4. List the active rules in UFW. A rule must exist for port 4242.
-
-5. Ass a new rule to open port 8080. Check that this one has been added by listing the active rules.
-
+    - See 2.
+5. Assign a new rule to open port 8080. Check that this one has been added by listing the active rules.
+    - `$ sudo ufw allow PORTNUMBER`
 6. Delete this new rule
+    - `$ sudo ufw deny NUMÉROduPORT`
 
 
 ## SSH
 
-1. Check that the SSH service is properly intalled.
-
+1. Check that the SSH service is properly installed.
+    - `$dpkg -l | grep ssh`
 2. Check that it is working properly.
-
+    - `$ sudo systemctl status sshd`
 3. Explain basically what SSH is and the value of using it.
-
+    - See Project Overview
 4. Verify that the SSH service only uses port 4242.
-
+    - See 2.
 5. Make sure you cannot use SSH to log in with root
-
+    - Use another terminal
+    - `$ ssh root@IPADDRESS -p 4242`
 7. Use SSH to log in with the new user.
+    - `$ ssh NEWUSER@IPADDRESS -p 4242`
 
 
-##
+## Script Monitoring
 
-
+1. Explain the operation of the script by displaying the code
+2. What is cron?
+    - cron est un programme qui permet aux utilisateurs des systèmes Unix d’exécuter automatiquement                                                                     des scripts, des commandes ou des logiciels à une date et une heure spécifiée à l’avance, ou selon un cycle défini à l’avance. 
+3. How to set up the script so that it runs every 10 minutes when the server starts up.
+    - `*/10 * * * * /root/monitoring.sh`
+4. How to stop the script without modify the script, restart the VM and verify the script.
+    - `$ sudo systemctl stop cron` OR add `#` before the process line inside cron.
 
 
 
@@ -199,8 +227,12 @@ line in crontab file.
 
 # REFERENCES
 
+- [PDF correction](https://github.com/sltcestloic/born2beroot_correction/blob/master/correction_born2beroot.pdf)
 - [CentOS vs Debian](https://www.openlogic.com/blog/centos-vs-debian)
 - [What is a VM](https://azure.microsoft.com/en-us/overview/what-is-a-virtual-machine/#how-do-work)
 - [Difference between apt and aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
 - [What is AppArmor](https://en.wikipedia.org/wiki/AppArmor)
 - [What is SSH](https://www.ucl.ac.uk/isd/what-ssh-and-how-do-i-use-it)
+- [What is LVM](https://wiki.archlinux.org/title/LVM_(Fran%C3%A7ais))
+- [What is UFW](https://averagelinuxuser.com/linux-firewall/)
+- [Guide UFW](https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands-fr)
