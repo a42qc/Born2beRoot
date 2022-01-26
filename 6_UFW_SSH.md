@@ -45,7 +45,7 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 | Check status                    | `sudo ufw status`
 | Enable the firewall             | `sudo ufw enable`
 | Activate a port                 | `sudo ufw allow PORTNUMBER` <br>                                                                                                                                  For B2bR : 4242, 80(http) et 21(FTP)
-| Disable a port                  | `sudo ufw delete allow NUMÉROduPORT`      
+| Disable a port                  | `sudo ufw deny NUMÉROduPORT`      
       
 
 ## SSH : Installation, status and port configuration
