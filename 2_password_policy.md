@@ -1,4 +1,4 @@
-# 3. Politique de mot de passe fort
+# 2. Politique de mot de passe fort
 
 ```
 Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
@@ -48,15 +48,15 @@ Note : To execute the chage command, you must be the owner of the account or hav
 | To view the current password expiry/aging details :  | `$ sudo chage –l USERNAME`
 | To configure the maximum No. of days after which a user should change the password. | `$ sudo chage -M <No./_of_days> <user_name>`
 | To configure the minimum No. of days required between the change of password.       | `$ sudo chage -m <No._of_days> <user_name>`
-| To configure warning prior to password expiration :  | `$ sudo chage -W <No._of_days> <user_name>` <br>                                                                                                                  exemple : chage -M 30 -m 2 -W 7 USERNAME
+| To configure warning prior to password expiration :  | `$ sudo chage -W <No._of_days> <user_name>` <br>                                                                                                                    exemple : chage -M 30 -m 2 -W 7 -d 2021-08-10 USERNAME(or root) (-d do not change the actual password) 
 
 ## II. Complexité (password strength) pam.d
 
 |                                        |                                                                               |
 | -------------------------------------- | ----------------------------------------------------------------------------- |
-| 1. Installer libpam-pwquality          | `$ sudo apt install libpam-pwquality` (ou 'apt-get')
+| 1. Installer libpam-pwquality          | `$ sudo apt install libpam-pwquality -y`
 | 2. Vérifier que c'est bien installé :  | `dpkg -l \| grep libpam-pwquality`
-| 3. Appliquer la complexité             | `$ sudo vim /etc/pam.d/common-password` <br>                                                                                                                      ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
+| 3. Appliquer la complexité             | `$ sudo vim /etc/pam.d/common-password` <br>                                                                                                                        ÉCRIRE SUR LA MÊME LIGNE QUE `password	requisite	pam_pwquality.so retry=3`
 
 <br>
 
@@ -82,7 +82,7 @@ Now reboot the system to apply the changes in the password policy.
 |                                                   |                                                                                   |
 | ------------------------------------------------- | --------------------------------------------------------------------------------- |
 | To view the current password expiry/aging details | `sudo chage –l username`
-| Test the secure password policy                   | 1. Run this command to add a user: `sudo useradd  testuser` <br>                                                                                                   2. Then set a password: `$ sudo passwd testuser` <br>                                                                                                             3. Now try to enter a password that does not include restrictions.
+| Test the secure password policy                   | 1. Run this command to add a user: `sudo useradd  testuser` <br>                                                                                                     2. Then set a password: `$ sudo passwd testuser` <br>                                                                                                               3. Now try to enter a password that does not include restrictions.
 | adding a complex password that meets the criteria defined by the password policy | `sudo passwd USERNAME` <br>                                                                                                                                         ex: Sup3rP4ssw0rd! (non c'est pas ça pour vrai)
 
 # Documentation
