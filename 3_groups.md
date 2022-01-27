@@ -1,4 +1,4 @@
-# 4. Groupes
+# 3. Groupes
 
 ## I. Create groups
 
