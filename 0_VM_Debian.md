@@ -82,14 +82,15 @@
 |                                |                                                                      |
 | -----------------------------: | -------------------------------------------------------------------- |
 | Configure the package manager  | 1. Scan another CD or DVD : NO <br>                                                                                                                                  2. Debian archive mirror : deb.debian.org <br>                                                                                                                      3. HTTP proxy information : BLANK FOR NONE <br>                                                                                                                      4. wait... <br>                                                                                                                                                      5. Participate in the package usage survey : NO
-| Software selection             | ***Ne RIEN cocher*** <br>                                                                                                                                            ÇA VEUT DIRE PÈSE PAS SUR ENTER!!!!! <br>                                                                                                                            Utiliser “space” pour sélectionner ou désélectionner
+| Software selection             | ***Ne RIEN cocher SAUF standard system utilities*** <br>                                                                                                                                            ÇA VEUT DIRE PÈSE PAS SUR ENTER!!!!! <br>                                                                                                                            Utiliser “space” pour sélectionner ou désélectionner
 | GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2.Device for boot loader installation : /dev/sda <br>                                                                                                                3. Continue
 
 
 ### IV. Vérifier partitionnage
 
 1. Start the VM
-2. Use 'lsblk' command inside the terminal
+2. `apt update -y && apt upgrade -y`
+3. Use 'lsblk' command inside the terminal
 
 
 # Documentation :
