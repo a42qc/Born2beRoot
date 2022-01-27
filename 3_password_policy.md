@@ -1,4 +1,4 @@
-# 1. Politique de mot de passe fort
+# 3. Politique de mot de passe fort
 
 ```
 Pour mettre en place une politique de mot de passe fort, il faudra remplir les conditions suivantes :
