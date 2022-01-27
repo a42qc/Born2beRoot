@@ -89,8 +89,10 @@
 ### IV. Vérifier partitionnage
 
 1. Start the VM
-2. `apt update -y && apt upgrade -y`
-3. Use 'lsblk' command inside the terminal
+2. `$ su -`
+3. `apt update -y && apt upgrade -y`
+4. `lsblk` to see if partitions are the same as ask
+5. `$ apt install vim`
 
 
 # Documentation :
