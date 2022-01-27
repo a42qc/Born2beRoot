@@ -1,8 +1,8 @@
-# 5. Users
+# 4. Users
 
 |                               |                             |
 | ----------------------------- | --------------------------- |
-| 1. Create a new user          | `$ sudo adduser <username>`
+| 1. Create a new user          | `$ sudo adduser USERNAME`
 | 2. Check if user is added     | `$ getent passwd USERNAME`
 | 3. Check password expiration  | `$ sudo chage -l USERNAME`
 
