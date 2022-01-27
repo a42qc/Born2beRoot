@@ -1,4 +1,4 @@
-# 3. Hostname - HOW TO FIND IP ADDRESS
+# 6. Hostname - HOW TO FIND IP ADDRESS
 
 |                       |                                                     |
 | --------------------- | --------------------------------------------------- |
