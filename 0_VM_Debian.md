@@ -26,12 +26,13 @@
 
 ## II. Properties
 
-|           |                                                                   |
-| --------: | ----------------------------------------------------------------- |
-| Settings  | 1. Scale Factor : Max                                             |
-| Storage   | 1. Contrôleur : IDE -> click on empty <br>                                                                                                                         2. Optical Drive : IDE Secondary Device 0 <br>                                                                                                                     3. Click on blue disk -> Choose a disk file... -> find ISO Debian |
-| Audio     | 1. Uncheck Enable Audio                                           |
-| Network   | 1. Attached to : bridged Adapter <br>                                                                                                                             2. Name : en0 : Ethernet                                          |
+|           |                                                                    |
+| --------: | ------------------------------------------------------------------ |
+| General   | -> Advanced <br>                                                                                                                                                   Shared Clipboard AND Drag'n'Drop: Bidirectional (active copy/past)
+| Display   | 1. Scale Factor : Max                                              |
+| Storage   | 1. Contrôleur : IDE -> click on empty <br>                                                                                                                         2. Optical Drive : IDE Secondary Device 0 <br>                                                                                                                     3. Click on blue disk -> Choose a disk file... -> find ISO Debian  |
+| Audio     | 1. Uncheck Enable Audio                                            |
+| Network   | 1. Attached to : bridged Adapter <br>                                                                                                                               2. Name : en0 : Ethernet                                           |
 
 
 ## III. Debian installation and configuration 
