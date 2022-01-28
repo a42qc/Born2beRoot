@@ -87,7 +87,7 @@
 | GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2.Device for boot loader installation : /dev/sda <br>                                                                                                                3. Continue
 
 
-### IV. Vérifier partitionnage et autres ajouts
+### IV. Mise-à-jour, vérifier partitionnage et installer vim
 
 1. Start the VM
 2. `$ su -`
