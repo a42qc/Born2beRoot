@@ -33,7 +33,7 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 |                                 |                                            |
 | ------------------------------- | ------------------------------------------ |
 | 1. Update and upgrade           | `$ sudo apt update -y && apt upgrade -y` 
-| 2. Install ufw                  | `$ sudo apt install ufw`
+| 2. Install ufw                  | `$ sudo apt install ufw -y`
 | 3. Reboot the system            | `$ reboot`
 | 4. Check if correctly installed | `dpkg -l \| grep ufw`
 
@@ -52,9 +52,9 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 
 ### Installation openSSH-server
 
-|                                  |                                            |
-| -------------------------------- | ------------------------------------------ |
-| 1. Install openssh               | `$ sudo apt install openssh-server`
+|                                  |                                                |
+| -------------------------------- | ---------------------------------------------- |
+| 1. Install openssh               | `$ sudo apt install ssh -y` (opensshd_server?)
 | 2. Reboot the system             | `$ sudo reboot`
 | 3. Check if correctly installed  | `$ dpkg -l \| grep ssh`
 
@@ -70,34 +70,34 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 
 ### Modify SSH port et root user permission
 
-|                                 |                                            |
-| ------------------------------- | ------------------------------------------ |
-| 1. Localise config files        | `find / -name "sshd_config" 2>/dev/null`
-| 2. Modify the config files      | `sudo vim /usr/share/openssh/sshd_config` <br>                                                                                                                   `sudo vim /etc/ssh/sshd_config`
+|                                                        |                                            |
+| ------------------------------------------------------ | ------------------------------------------ |
+| 1. Localise config files                               | `find / -name "sshd_config" 2>/dev/null`
+| 2. Modify the config files                             | `sudo vim /usr/share/openssh/sshd_config` <br>                                                                                                                      `sudo vim /etc/ssh/sshd_config`
 | 3. Search `Port 22` or `#Port 22` (default SSH port)
 | 4. Replace `22` by `4242`
 | 5. Reboot SSH `sudo systemctl restart sshd`
-| 6. Check open ports             | `$ ss -tulw`
+| 6. Check open ports                                    | `$ ss -tulw`
 
 ### Permission utilisateur root
 
 To disable SSH login as root irregardless of authentication mechanism
 
-|                                 |                                                    |
-| ------------------------------- | -------------------------------------------------- |
-| 1. Localise sshd_config file    | `find / -name "sshd_config" 2>/dev/null`
-| 2. Modify sshd_config file      | `$ sudo vim /usr/share/openssh/sshd_config`
-| 3. Find `PermitRootLogin` and set it to `no`
-| 4. 'reboot'
-| 5. Check status                 | `$ systemctl status ssh` OR (`$ service ssh status` )
+|                                               |                                                        |
+| --------------------------------------------- | ------------------------------------------------------ |
+| 1. Localise sshd_config file                  | `find / -name "sshd_config" 2>/dev/null`
+| 2. Modify sshd_config file                    | `$ sudo vim /usr/share/openssh/sshd_config`
+| 3. Find `PermitRootLogin` and set it to `no`  |
+| 4. 'reboot'                                   |
+| 5. Check status                               | `$ systemctl status ssh` OR (`$ service ssh status` )
 
 
 ### Connection au server via SSH (connection à distance)
 
-|                                              |                                            |
-| -------------------------------------------- | ------------------------------------------ |
+|                                              |                                                          |
+| -------------------------------------------- | -------------------------------------------------------- |
 | 1. Get IP address                            | `hostname -I`
-| 2. Connect to the server by another terminal | `$ ssh NOMd'UTILISATEUR@ADRESSEip -p NUMÉROduPORT` <br>                                                                                                           exemple : `ssh audrey@10.12.231.216 -p 4242`
+| 2. Connect to the server by another terminal | `$ ssh NOMd'UTILISATEUR@ADRESSEip -p NUMÉROduPORT` <br>                                                                                                            exemple : `ssh audrey@10.12.231.216 -p 4242`
 | Finish a SSH session                         | `$ logout` OR ( `$ exit`)
 
 
