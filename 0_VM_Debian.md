@@ -45,7 +45,7 @@
 | ---------------------------: | ----------------------------- |
 | Language :                   | English
 | Country :                    | Canada
-| Keymap :                     | Canadian Multilingual
+| Keymap :                     | US english
 | Hostname :                   | username42
 | Root password :              | UTh1nkImStup1d?
 | Full name of the new user :  | your name dude
@@ -87,7 +87,7 @@
 | GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2.Device for boot loader installation : /dev/sda <br>                                                                                                                3. Continue
 
 
-### IV. Vérifier partitionnage
+### IV. Vérifier partitionnage et autres ajouts
 
 1. Start the VM
 2. `$ su -`
@@ -95,6 +95,11 @@
 4. `lsblk` to see if partitions are the same as ask
 5. `$ apt install vim`
 
+### Change the keybord language
+1. `sudo dpkg-reconfigure keyboard-configuration`
+2. Macbookpro
+3. US english Macbook
+4. Reboot
 
 # Documentation :
 
