@@ -1,4 +1,4 @@
-# 6. Service SSH, pare-feu et connection à distance
+# 5. Service SSH, pare-feu et connection à distance
 
 ```
 Un service SSH sera actif sur le port 4242 uniquement. Pour des questions de sécurité, on ne devrait pas pouvoir 
