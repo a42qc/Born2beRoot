@@ -102,6 +102,13 @@
 3. US english Macbook
 4. Reboot
 
+### Instantané (snapshots)
+
+1. Cliqué sur les trois points
+2. Cliqué sur Instantanés
+3. Cliqué sur Prendre un instantané
+4. Clic droit sur l'instantané désiré pour démarrer à partir de là.
+
 # Documentation :
 
 - [Vidéo](https://www.youtube.com/watch?v=2w-2MX5QrQw) démonstrative de comment partitionner le disque dur virtuel<br/>
