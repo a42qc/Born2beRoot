@@ -5,13 +5,23 @@
 
 ## Définitions paquets à installer
 
-| Paquets | Définitions |
-| ------- | ----------- |
-WordPress | Système de gestion de contenu opensource (SGC ou content management system (CMS). Permet de créer et gérer différents types de sites Web sans avoir à les coder soi-même.
-lighttpd  | Logiciel libre de serveur web (HTTP) sécurisé, rapide et flexible. Lighttpd is a free, open-source and high-speed webserver specially designed for speed-critical environments. 
-MariaDB   | Système de gestion de base de données. Fork communautaire de MySQL.
-PHP       | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
-Let’s Encrypt | (optionnel) free SSL to secure your web server.
+| Paquets       | Définitions                                                                                                                   |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| WordPress     | Système de gestion de contenu opensource (SGC ou content management system (CMS). Permet de créer et gérer différents                                             types de sites Web sans avoir à les coder soi-même.
+| lighttpd      | Logiciel libre de serveur web (HTTP) sécurisé, rapide et flexible. Lighttpd is a free, open-source and high-speed webserver                                       specially designed for speed-critical environments. 
+| MariaDB       | Système de gestion de base de données. Fork communautaire de MySQL.
+| PHP           | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques                                       (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
+| Let’s Encrypt | (optionnel) free SSL to secure your web server.
+
+## Configurations des services (bonus)
+
+1. MariaDB : database server installation and configuration 
+    - 
+
+
+
+
+
 
 ## Installation et configuration lighttpd, php et mariadb
 <a href ="https://www.howtoforge.com/how-to-install-lighttpd-with-php-and-mariadb-on-debian-10/">lien du tuto</a>
