@@ -93,7 +93,8 @@
 2. `$ su -`
 3. `apt update -y && apt upgrade -y`
 4. `lsblk` to see if partitions are the same as ask
-5. `$ apt install vim`
+5. `$ sudo apt install vim`
+6. `$ sudo apt install git` (use https inside the VM to clone a repo)
 
 ### Change the keybord language
 1. `sudo dpkg-reconfigure keyboard-configuration`
