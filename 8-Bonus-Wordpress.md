@@ -168,7 +168,7 @@ $ sudo chown nobody:nogroup /home//ftp
 $ sudo chmod a-w /home//ftp
 ```
 
-### How to use FTP service
+### ✏️ How to use FTP service
 #### 1. Click on `aller`
 #### 2. Click on `Se connecter au serveur...`
 #### 3. `ftp://IPADDRESS`
