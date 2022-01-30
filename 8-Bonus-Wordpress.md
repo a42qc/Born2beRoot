@@ -129,7 +129,7 @@ $ sudo rm -r /var/www/html/wordpress IF YOU WANT TO DELETE THE WORDPRESS DIRECTO
 ```bash
 $ cd /var/www/html
 $ sudo cp wordpress/wp-config-sample.php wp-config.php
-$ sudo chmod 710 wp-config.php
+$ sudo chmod 700 wp-config.php
 ```
 💡 `700` -> `-rwx-------`
 
@@ -202,6 +202,8 @@ $ sudo chown nobody:nogroup ftp
 $ sudo chmod a-w ftp
 ```
 💡 `a-w` -> `dr-xr-xr-x`
+
+### ✏️ Pour configurer wordpress, accéder depuis un naviguateur address_ip/wordpress/wp-admin et au site lui meme adresse_ip/wordpress
 
 ### ✏️ How to use FTP service
 
