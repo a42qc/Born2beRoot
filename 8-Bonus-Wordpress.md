@@ -1,152 +1,187 @@
 # 8. BONUS : Wordpress lighttpd, MariaDB et PHP
 
 ## Tâches
-• Mettre en place un site web WordPress fonctionnel avec, comme services, lighttpd, MariaDB et PHP.
+📌 Mettre en place un site web WordPress fonctionnel avec les services lighttpd, MariaDB et PHP.
 
 ## Définitions paquets à installer
 
-| Paquets       | Définitions                                                                                                                   |
+| Paquets       | 📔 Définitions 📔                                                                                                            |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| WordPress     | Système de gestion de contenu opensource (SGC ou content management system (CMS). Permet de créer et gérer différents                                             types de sites Web sans avoir à les coder soi-même.
-| lighttpd      | Logiciel libre de serveur web (HTTP) sécurisé, rapide et flexible. Lighttpd is a free, open-source and high-speed webserver                                       specially designed for speed-critical environments. 
+| WordPress     | Système de gestion de contenu opensource (SGC ou content management system (CMS). Permet de créer et gérer différents                                               types de sites Web sans avoir à les coder soi-même.
+| lighttpd      | Logiciel libre de serveur web (HTTP) sécurisé, rapide et flexible. Lighttpd is a free, open-source and high-speed webserver                                         specially designed for speed-critical environments. 
 | MariaDB       | Système de gestion de base de données. Fork communautaire de MySQL.
-| PHP           | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques                                       (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
+| PHP           | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques                                         (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
 | Let’s Encrypt | (optionnel) free SSL to secure your web server.
 
 ## Configurations des services (bonus)
 
-### MariaDB : database server installation and configuration 
+### ✏️ MariaDB : database server installation and configuration 
 
-1. Install MariaDB server and client
+#### 1. Install MariaDB server and client
 ```bash
 $ sudo apt install mariadb-server mariadb-client -y
 ```
 
-2. Start service, activate it at startup and check status
+#### 2. Start service, activate it at startup and check status
 ```bash
 $ sudo systemctl start mariadb
 $ sudo systemctl enable mariadb
 $ susdo systemctl status mariadb
 ```
 
-3. Secure the database
+#### 3. Secure the database
 ```bash
 $ sudo mysql_secure_installation
 ```
 | Questions                              | Answer                                                    |
 | -------------------------------------- | --------------------------------------------------------- |
 | Enter current password for root :      | PRESS ENTER
-| Set root password?                     | YES  <br>                                                                                                                                                            (Setting the root password ensures that nobody can log into the MariaDB root user without the proper authorisation.)
-| Remove anonymous users?                | YES <br>                                                                                                                                                            (By default, an anonymous user allow anyone to log into MariaDB without having to gave a user account created for them.                                              This intended only for testing. Remove them before moving into a production environment.)                           
-| Disallow root login remotely?          | YES <br>                                                                                                                                                            (Root should only be allowed to connect from 'localhost. <br>                                                                                                        This ensures that someone cannont guess at the root password from the network.')
-| Remove test database and access to it? | YES <br>                                                                                                                                                            (Database named 'test' that anyone can access. Should be remove before moving into a production environment.)
-| Reload privilege tables now?           | YES <br>                                                                                                                                                            (Reloading the privilege tables will ensure that all changes made so far will take effect immediately.)
+| Set root password?                     | YES
+| | (Setting the root password ensures that nobody can log into the MariaDB root user without the proper authorisation.)
+| Remove anonymous users?                | YES
+| | (By default, an anonymous user allow anyone to log into MariaDB without having to gave a user account created for them. <br>                                        This intended only for testing. Remove them before moving into a production environment.)                           
+| Disallow root login remotely?          | YES
+| | (Root should only be allowed to connect from 'localhost. <br>                                                                                                        This ensures that someone cannont guess at the root password from the network.')
+| Remove test database and access to it? | YES
+| | (Database named 'test' that anyone can access. Should be remove before moving into a production environment.)
+| Reload privilege tables now?           | YES
+| | (Reloading the privilege tables will ensure that all changes made so far will take effect immediately.)
 
-4. Access to MYSQL shell to create a database for the Wordpress web site.
+#### 4. Access to MYSQL shell to create a database for the Wordpress web site.
 ```bash
 $ sudo mysql
 ```
-- Choose a database name
+##### 4.1 Choose a database name
 ```SQL
 MariaDB [(none)]> CREATE DATABASE wordpressB2BR;
 ```
-- Database list
+##### 4.2 Database list
 ```SQL
 MariaDB [(none)]> SHOW DATABASES;
 ```
-- Create a user
+##### 4.3 Create a user
 ```
 MariaDB [(none)]> CREATE USER 'wordpressB2BR'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';
 ```
-- Give all rights
+##### 4.4 Give all rights
 ```SQL
 MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpressB2BR.* TO 'wordpressB2BR'@'localhost';
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
-- Leave MYSQL
+##### 4.5 Leave MYSQL
 ```SQL
 MariaDB [(none)]> quit
 ```
  
-### lighttpd : installation and activation
+### ✏️ lighttpd : installation and activation
 
-1.  Install `apt install lighttpd -y`
-2.  Start Lighttpd service and enable it to start after system reboot
+#### 1. Install 
+```bash
+apt install lighttpd -y
+```
+#### 2.  Start Lighttpd service and enable it to start after system reboot
 ```
 systemctl start lighttpd
 systemctl enable lighttpd
 systemctl status lighttpd (check status)
 ```
 
-### PHP : installation
-
+### ✏️ PHP : installation
 ```bash
 $ sudo apt install php-cgi php-mysql -y
 ```
 
-### WORDPRESS : intall and configuration
+### ✏️ WORDPRESS : installation and configuration
+
+#### 1. Install w3m (teminal web browser)
 ```bash
 $ sudo apt install w3m -y
-
-    w3m http://wordpress.org => download latest.tar.gz
-
-    sudo tar -xyzf latest.tar.gz => sudo cp -r wordpress/* /var/www/html => sudo rm latest.tar.gz => sudo rm -rf /var/www/html/wordpress
-
-    cd /var/www/html => sudo cp wp-config-sample.php wp-config.php => sudo wp-config.php
-
-define( 'DB_NAME', 'database_name_here' );^M define( 'DB_USER', 'username_here' );^M define( 'DB_PASSWORD', 'password_here' );^M
-
-    sudo lighty-enable-mod fastcgi
-
-    sudo lighty-enable-mod fastcgi-php
-
-    sudo service lighttpd force-reload
 ```
-23 - intall and set ftp (sftp)
+#### 2. Dowload wordpress
+```bash
+$ w3m http://wordpress.org
+download latest.tar.gz
+```
 
-    sudo apt install vsftpd
+#### 3. Decompress the directory with tar
+```bash
+$ sudo tar -xyzf latest.tar.gz
+```
+#### 4. Copy the directory inside `var/www/html`
+```bash
+$ sudo cp -r wordpress/* /var/www/html
+$ sudo rm latest.tar.gz
+$ sudo rm -rf /var/www/html/wordpress
+```
 
-    sudo ufw allow 21
+#### 5. Copy the Wordpress configuration file 
+```bash
+$ cd /var/www/html
+$ sudo cp wp-config-sample.php wp-config.php 
+```
 
-    cd /etc => vi vsftpd.conf
+#### 6. Configure Wordpress database
+```bash
+$ sudo wp-config.php
+```
+```SQL
+define( 'DB_NAME', 'database_name_here' );
+define( 'DB_USER', 'username_here' );
+define( 'DB_PASSWORD', 'password_here' );
+```
 
-write_enable=YES
+#### 7. Configure and restart Lighttpd
+```bash
+$ sudo lighty-enable-mod fastcgi
+$ sudo lighty-enable-mod fastcgi-php
+$ sudo service lighttpd force-reload
+```
 
-    sudo mkdir /home//ftp
+### ✏️ FTP : installation and configuration
 
-    sudo mkdir /home//ftp/files
+#### 1. Install `vsftpd`
+```bash
+$ sudo apt install vsftpd
+```
+#### 2. Allow FTP port 21
+```bash
+$ sudo ufw allow 21
+```
 
-    udo chown nobody:nogroup /home//ftp
+#### 3. Configure vsftpd
+```bash
+$ cd /etc
+$ vim vsftpd.conf
 
-    sudo chmod a-w /home//ftp
+CHANGE THAT LINE : write_enable=YES
+```
 
+#### 4. Create `ftp` directory and files directory
+```bash
+$ sudo mkdir /home//ftp
+$ sudo mkdir /home//ftp/files
+```
 
+#### 5. Change `ftp` directory rights
+```bash
+$ sudo chown nobody:nogroup /home//ftp
+$ sudo chmod a-w /home//ftp
+```
 
+### How to use FTP service
+#### 1. Click on `aller`
+#### 2. Click on `Se connecter au serveur...`
+#### 3. `ftp://IPADDRESS`
+#### 4. `username` et `password`
+#### 5. Now, we have access to directories and files
 
-## Installation et configuration lighttpd, php et mariadb
-<a href ="https://www.howtoforge.com/how-to-install-lighttpd-with-php-and-mariadb-on-debian-10/">lien du tuto</a>
-0.  Update our system `apt update -y && apt upgrade -y`
-
-
-
-
-
-
-aller
-se connecter au serveur
-ftp://IPADDRESS
-username et mot de passe
-Puis acces au dossiers etr fichiers
-
-## Installation et configuration Wordpress
-<a href="https://www.osradar.com/install-wordpress-with-lighttpd-debian-10/">lien du tuto</a>
-
-## Documentation
+## 📚 Documentation 📚
 - [Base de données](https://fr.wikipedia.org/wiki/Base_de_donn%C3%A9es) — Wikipédia
 - [Serveur web](https://fr.wikipedia.org/wiki/Serveur_web) — Wikipédia
 - [Installer WordPress sur Debian](https://wiki.debian.org/WordPress)
 - [Désinstaller proprement ses paquets](https://linuxfr.org/wiki/desinstaller-proprement-ses-paquets-sur-sa-distribution#toc-suppression-des-d%C3%A9pendances-avec-apt---purge-autoremove)
 - [How to Install Lighttpd with PHP, MariaDB](https://www.howtoforge.com/how-to-install-lighttpd-with-php-and-mariadb-on-debian-10/)
+- <a href="https://www.osradar.com/install-wordpress-with-lighttpd-debian-10/">Installation et configuration Wordpress</a>
 
 certbot certonly --webroot -w /var/www/html/ -d www.example.com
 dpkg -l | 
