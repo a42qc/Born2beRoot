@@ -98,37 +98,51 @@ $ sudo apt install php-cgi php-mysql -y
 $ sudo apt install w3m -y
 ```
 #### 2. Dowload wordpress
+
+💡 Make sure you are in the right directory. <br>
+Here, I want to download it inside '/home/USERNAME' directory.
+
 ```bash
 $ w3m http://wordpress.org
-download latest.tar.gz
+
+-> Get Wordpress
+-> Download .tar.gz
+(Download) Save file to: wordpress-5.9.tar.gz
+-> Ok
 ```
 
 #### 3. Decompress the directory with tar
 ```bash
-$ sudo tar -xyzf latest.tar.gz
+$ sudo tar -xvf wordpress-5.9.tar.gz
 ```
+
+💡`tar -xvf` means `tar --extract --verbose --file=FILENAME`
+
 #### 4. Copy the directory inside `var/www/html`
 ```bash
-$ sudo cp -r wordpress/* /var/www/html
+$ sudo mv wordpress /var/www/html
 $ sudo rm latest.tar.gz
-$ sudo rm -rf /var/www/html/wordpress
+$ sudo rm -r /var/www/html/wordpress IF YOU WANT TO DELETE THE WORDPRESS DIRECTORY
 ```
 
 #### 5. Copy the Wordpress configuration file 
 ```bash
 $ cd /var/www/html
-$ sudo cp wp-config-sample.php wp-config.php 
+$ sudo cp wordpress/wp-config-sample.php wp-config.php
+$ sudo chmod 710 wp-config.php
 ```
+💡 `700` -> `-rwx-------`
 
 #### 6. Configure Wordpress database
 ```bash
-$ sudo wp-config.php
+$ sudo vim wp-config.php
 ```
-```SQL
-define( 'DB_NAME', 'database_name_here' );
-define( 'DB_USER', 'username_here' );
-define( 'DB_PASSWORD', 'password_here' );
 ```
+define( 'DB_NAME', 'database_name_here' ); -> wordpressB2BR
+define( 'DB_USER', 'username_here' ); -> wordpressB2BR
+define( 'DB_PASSWORD', 'password_here' ); -> Sup3rCh4ts!
+```
+❓ Why the database password is in clear? Same as inside MariaDB...
 
 #### 7. Configure and restart Lighttpd
 ```bash
@@ -136,13 +150,31 @@ $ sudo lighty-enable-mod fastcgi
 $ sudo lighty-enable-mod fastcgi-php
 $ sudo service lighttpd force-reload
 ```
+💡The debian Policy Manual also explains the different parameters:
+```
+    start
+    start the service,
+
+    stop
+    stop the service,
+
+    restart
+    stop and restart the service if it's already running, otherwise start the service
+
+    reload
+    cause the configuration of the service to be reloaded without actually stopping and restarting the service,
+
+    force-reload
+    cause the configuration to be reloaded if the service supports this, otherwise restart the service.
+```
 
 ### ✏️ FTP : installation and configuration
 
 #### 1. Install `vsftpd`
 ```bash
-$ sudo apt install vsftpd
+$ sudo apt install vsftpd -y
 ```
+
 #### 2. Allow FTP port 21
 ```bash
 $ sudo ufw allow 21
@@ -153,22 +185,26 @@ $ sudo ufw allow 21
 $ cd /etc
 $ vim vsftpd.conf
 
-CHANGE THAT LINE : write_enable=YES
+Uncomment this to enable any form of FTP write command.
+write_enable=YES
 ```
 
 #### 4. Create `ftp` directory and files directory
 ```bash
-$ sudo mkdir /home//ftp
-$ sudo mkdir /home//ftp/files
+cd /home/USERNAME
+$ sudo mkdir ftp
+$ sudo mkdir ftp/files
 ```
 
 #### 5. Change `ftp` directory rights
 ```bash
-$ sudo chown nobody:nogroup /home//ftp
-$ sudo chmod a-w /home//ftp
+$ sudo chown nobody:nogroup ftp
+$ sudo chmod a-w ftp
 ```
+💡 `a-w` -> `dr-xr-xr-x`
 
 ### ✏️ How to use FTP service
+
 #### 1. Click on `aller`
 #### 2. Click on `Se connecter au serveur...`
 #### 3. `ftp://IPADDRESS`
