@@ -118,13 +118,15 @@ cgi.fix_pathinfo=1
 
 #### 4. By default, PHP-FPM listen on socket UNIX `/var/run/php7-fpm.sock`. Change it for TCP socket.
 ```bash
-$ sudo vim `/etc/php/7.4/fpm/pool.d/www.conf` 
+$ sudo vim `/etc/php/7.3/fpm/pool.d/www.conf` 
 
 listen = 127.0.0.1:9000
 ```
 
-#### 5. Ouvrir le fichier /etc/lighttpd/conf-available/15-fastcgi-php.confpour activer le support du module FastCGI dans Lighttpd
+#### 5. Activate FastCGI module support inside lighttpd
 ```bash
+$ vim /etc/lighttpd/conf-available/15-fastcgi-php.conf
+
 Search thoses lines
 "bin-path" => "/usr/bin/php-cgi",
 "socket" => "/var/run/lighttpd/php.socket",
@@ -189,7 +191,7 @@ sudo chmod -R 755 wordpress
 #### 4. Change the Wordpress configuration file's name
 ```bash
 $ cd /wordpress 
-$  mv wp-config-sample.php wp-config.php
+$ mv wp-config-sample.php wp-config.php
 ```
 
 5. Configure 
@@ -199,10 +201,10 @@ $ vim wp-config.php
 define( 'DB_NAME', 'wordpress' );
 
 /** Utilisateur de la base de données MySQL. */
-define( 'DB_USER', 'wordpress' );
+define( 'DB_USER', 'mchampag' );
 
 /** Mot de passe de la base de données MySQL. */
-define( 'DB_PASSWORD', 'Rtx3t3.b!' )
+define( 'DB_PASSWORD', 'Sup3rCh4ts!' )
 ```
 
 
@@ -252,13 +254,16 @@ $ sudo chmod 700 wp-config.php
 $ sudo vim wp-config.php
 ```
 ```
-define( 'DB_NAME', 'database_name_here' ); -> wordpressB2BR
-define( 'DB_USER', 'username_here' ); -> wordpressB2BR
+define( 'DB_NAME', 'database_name_here' ); -> wordpress
+define( 'DB_USER', 'username_here' ); -> mchampag
 define( 'DB_PASSWORD', 'password_here' ); -> Sup3rCh4ts!
 ```
 ❓ Why the database password is in clear? Same as inside MariaDB...
 
-#### 7. 
+7. Installation 
+Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.232.35/wordpress/wp-admin/install.php)
+<br>
+![Installation Worpress inside a browser](https://imgur.com/a/XAsVz4m  "WP installation browser")
 
 ### ✏️ FTP : installation and configuration
 
