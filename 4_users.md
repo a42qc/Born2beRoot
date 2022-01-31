@@ -7,6 +7,7 @@
 | 3. Check password expiration  | `$ sudo chage -l USERNAME`
 | Delete a user and all entries | `$ deluser USERNAME`
 | Modify an user                | [See examples here](https://www.tecmint.com/usermod-command-examples/)
+| How to connect to an user     | `$ su USERNAME`
 
 <br>
 
