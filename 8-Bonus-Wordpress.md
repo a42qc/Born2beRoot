@@ -33,8 +33,8 @@ $ susdo systemctl status mariadb
 ```bash
 $ sudo mysql_secure_installation
 ```
-| Questions                              | Answer                                                    |
-| -------------------------------------- | --------------------------------------------------------- |
+| Questions                              | Answer                                                                                 |
+| -------------------------------------- | -------------------------------------------------------------------------------------- |
 | Enter current password for root :      | PRESS ENTER
 | Set root password?                     | NO
 | | (Setting the root password ensures that nobody can log into the MariaDB root user without the proper authorisation.)
@@ -87,13 +87,28 @@ systemctl enable lighttpd
 ```
 💡`systemctl status lighttpd`
 
+
 ### ✏️ PHP : installation and configuration
 #### 1. Installation
 ```bash
 $ sudo apt install php php-cli php-common php-fpm php-mysql -y
 ```
 
-#### 2. Modify '/etc/php/7.3/fpm/php.ini' file to activate lighttpd PHP support. (I DIDN'T NEED TO DO THAT)
+#### 2. Puis, sans être essentiel dans le même fichier de configuration, l'emplacement par defaut du repertoire racine des fichiers qui compose les pages web est /var/www/html . Pour modifier la racine des fichiers web, éditer la ligne server.document-root comme ceci:
+```bash
+$ sudo vim /etc/lighttpd/lighttpd.conf
+
+Search
+server.document-root = "/var/www/html"
+
+Change it for
+server.document-root = "/var/www"
+```
+Cela permettra de placer le dossier wordpress (qui contiendra les fichier de la page web) a cette emplacement /var/www.
+
+Le fichier de configuration principal est placés ici: /etc/lighttpd/lighttpd.conf et les autres fichiers de configuration sont placés ici: /etc/lighttpd/conf-available et quand certain fichier sont activés, des lien symboliques sont placé dans le repertoire /etc/lighttpd/conf-enable.
+
+#### 3. Modify '/etc/php/7.3/fpm/php.ini' file to activate lighttpd PHP support. (I DIDN'T NEED TO DO THAT)
 ```bash
 $ sudo vim /etc/php/7.3/fpm/php.ini
 
@@ -101,25 +116,96 @@ Decomment that line
 cgi.fix_pathinfo=1
 ```
 
-#### 3. Par défaut, **PHP-FPM** écoute sur le socket UNIX `/var/run/php7-fpm.sock`. Nous devrons donc altérer le fichier `/etc/php/7.4/fpm/pool.d/www.conf` pour que **PHP-FPM** écoute sur le socket TCP. Pour cela, modifier la valeur `listen =` pour `127.0.0.1:9000`
+#### 4. By default, PHP-FPM listen on socket UNIX `/var/run/php7-fpm.sock`. Change it for TCP socket.
+```bash
+$ sudo vim `/etc/php/7.4/fpm/pool.d/www.conf` 
 
-#### 4. 
+listen = 127.0.0.1:9000
+```
 
-#### Activate FastCGI and FastCGI-PHP modules
+#### 5. Ouvrir le fichier /etc/lighttpd/conf-available/15-fastcgi-php.confpour activer le support du module FastCGI dans Lighttpd
+```bash
+Search thoses lines
+"bin-path" => "/usr/bin/php-cgi",
+"socket" => "/var/run/lighttpd/php.socket",
+
+Change it for
+"host" => "127.0.0.1",
+"port" => "9000",
+```
+
+#### 6. Activate FastCGI and FastCGI-PHP modules
 Configure and restart Lighttpd
 ```bash
 $ sudo lighty-enable-mod fastcgi
 $ sudo lighty-enable-mod fastcgi-php
 ```
 
-#### Restart PHP and lighttpd
+#### 7. Restart PHP and lighttpd
 💡 How to found PHP version `php -v` -> php7.3
 ```
 $ sudo systemctl restart php7.3-fpm
 $ sudo systemctl restart lighttpd
 ```
 
+💡`sudo systemctl status php7.3-fpm`
+
 ### ✏️ WORDPRESS : installation and configuration
+
+1. Download
+```bash
+cd /var/www
+sudo wget https://fr.wordpress.org/latest-fr_FR.tar.gz
+```
+💡Or dowload it like that:
+#### 1. Install w3m (teminal web browser) and download Wordpress
+```bash
+$ sudo apt install w3m -y
+```
+💡 Make sure you are in the right directory. <br>
+Here, I want to download it inside '/var/www' directory.
+```bash
+$ w3m http://wordpress.org
+
+-> Get Wordpress
+-> Download .tar.gz
+(Download) Save file to: wordpress-5.9.tar.gz
+-> Ok
+```
+
+2. Decompress
+```bash
+$ sudo tar -xf latest-fr_FR.tar.gz
+$ rm latest-fer_FR.tar.gz
+```
+
+3. Change owner and rights
+```bash
+sudo chown -R www-data:www-data wordpress
+sudo chmod -R 755 wordpress
+```
+💡 `ls -la` to verify changes
+
+#### 4. Change the Wordpress configuration file's name
+```bash
+$ cd /wordpress 
+$  mv wp-config-sample.php wp-config.php
+```
+
+5. Configure 
+```bash
+$ vim wp-config.php
+
+define( 'DB_NAME', 'wordpress' );
+
+/** Utilisateur de la base de données MySQL. */
+define( 'DB_USER', 'wordpress' );
+
+/** Mot de passe de la base de données MySQL. */
+define( 'DB_PASSWORD', 'Rtx3t3.b!' )
+```
+
+
 
 #### 1. Install w3m (teminal web browser)
 ```bash
