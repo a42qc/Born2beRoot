@@ -15,6 +15,8 @@
 
 ## Configurations des services (bonus)
 
+___
+
 ### ✏️ MariaDB : database server installation and configuration 
 
 #### 1. Install MariaDB server and client
@@ -73,7 +75,10 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 ```SQL
 MariaDB [(none)]> quit
 ```
- 
+
+___
+
+
 ### ✏️ lighttpd : web server installation and activation
 
 #### 1. Installation
@@ -86,6 +91,8 @@ systemctl start lighttpd
 systemctl enable lighttpd
 ```
 💡`systemctl status lighttpd`
+
+___
 
 
 ### ✏️ PHP : installation and configuration
@@ -151,6 +158,9 @@ $ sudo systemctl restart lighttpd
 ```
 
 💡`sudo systemctl status php7.3-fpm`
+
+___
+
 
 ### ✏️ WORDPRESS : installation and configuration
 
@@ -273,6 +283,9 @@ Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.23
 
 ![Tableau de bord Wordpress](https://i.imgur.com/XBoGdsR.png)
 
+___
+
+
 ### ✏️ FTP : installation and configuration
 
 #### 1. Install `vsftpd`
@@ -308,7 +321,8 @@ $ sudo chmod a-w ftp
 ```
 💡 `a-w` -> `dr-xr-xr-x`
 
-### ✏️ Pour configurer wordpress, accéder depuis un naviguateur address_ip/wordpress/wp-admin et au site lui meme adresse_ip/wordpress
+___
+
 
 ### ✏️ How to use FTP service
 
@@ -317,6 +331,9 @@ $ sudo chmod a-w ftp
 #### 3. `ftp://IPADDRESS`
 #### 4. `username` et `password`
 #### 5. Now, we have access to directories and files
+
+___
+
 
 ## 📚 Documentation 📚
 - [Base de données](https://fr.wikipedia.org/wiki/Base_de_donn%C3%A9es) — Wikipédia
