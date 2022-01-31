@@ -175,54 +175,7 @@
 3. How to set up the script so that it runs every 10 minutes when the server starts up.
     - `*/10 * * * * /root/monitoring.sh`
 4. How to stop the script without modify the script, restart the VM and verify the script.
-    - `$ sudo systemctl stop cron` OR add `#` before the process line inside cron.
-
-
-
-|                                          |                                                             |
-| ---------------------------------------- | ----------------------------------------------------------- |
-| 1. `$ lsblk`                             | Check partitions
-| 2. `$ sudo aa-status`                    | AppArmor status
-| 3. `$ getent group sudo`                 | sudo group users
-| 4. `$ getent group user42`               | user42 group users
-| 5. `$ sudo service ssh status`           | ssh status, yep
-| 6. `$ sudo ufw status`                   | ufw status
-| 7. `$ ssh username@ipadress -p 4242`     | connect to VM from your host (physical) machine via SSH
-| 8. `$ nano /etc/sudoers.d/<filename>`    | yes, sudo config file. You can $ ls /etc/sudoers.d first
-| 9. `$ nano /etc/login.defs`              | password expire policy
-| 10. `$ nano /etc/pam.d/common-password`  | password policy
-| 11. `$ sudo crontab -l`                  | cron schedule
-| 12. `$sudo nano /etc/hostname`           | change hostname
-
-
-
-Where is sudo logs in /var/log/sudo?
-[$cd /var/log/sudo/00/00 && ls]
-You will see a lot of directories with names like 01 2B 9S 4D etc. They contain the logs we need.
-[$ sudo apt update]
-[$ ls]
-Now you see that we have a new directory here.
-[$ cd <nameofnewdirectory> && ls]
-[$ cat log] <- Input log
-[$ cat ttyout] <- Output log
-
-How to add and remove port 8080 in UFW?
-[$ sudo ufw allow 8080] <- allow
-[$ sudo ufw status] <- check
-[$ sudo ufw deny 8080] <- deny (yes yes)
-
-How to run script every 30 seconds?
-[$ sudo crontab -e]
-Remove or commit previous cron "schedule" and add next lines in crontab file
-|*************************************************|
-| */1 * * * * /path/to/monitoring.sh              |
-| */1 * * * * sleep 30s && /path/to/monitoring.sh |
-|*************************************************|
-To stop script running on boot you just need to remove or commit
-|********************************|
-| @reboot /path/to/monitoring.sh |
-|********************************|
-line in crontab file.
+    - `$ sudo systemctl stop cron`(affect all processes and reset to start after reboot) OR add `#` before the process line inside cron.
 
 
 # REFERENCES
