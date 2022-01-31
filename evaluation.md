@@ -147,7 +147,7 @@
 5. Assign a new rule to open port 8080. Check that this one has been added by listing the active rules.
     - `$ sudo ufw allow PORTNUMBER`
 6. Delete this new rule
-    - `$ sudo ufw deny NUMÉROduPORT`
+    - `$ sudo ufw delete NUMÉROduPORT` (deny, disable)
 
 
 ## SSH
