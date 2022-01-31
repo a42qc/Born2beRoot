@@ -36,7 +36,7 @@ $ sudo mysql_secure_installation
 | Questions                              | Answer                                                    |
 | -------------------------------------- | --------------------------------------------------------- |
 | Enter current password for root :      | PRESS ENTER
-| Set root password?                     | YES
+| Set root password?                     | NO
 | | (Setting the root password ensures that nobody can log into the MariaDB root user without the proper authorisation.)
 | Remove anonymous users?                | YES
 | | (By default, an anonymous user allow anyone to log into MariaDB without having to gave a user account created for them. <br>                                        This intended only for testing. Remove them before moving into a production environment.)                           
@@ -53,29 +53,30 @@ $ sudo mysql
 ```
 ##### 4.1 Choose a database name
 ```SQL
-MariaDB [(none)]> CREATE DATABASE wordpressB2BR;
+MariaDB [(none)]> CREATE DATABASE wordpress;
 ```
-##### 4.2 Database list
+💡 Database list
 ```SQL
 MariaDB [(none)]> SHOW DATABASES;
 ```
-##### 4.3 Create a user
+##### 4.2 Create a user
 ```
-MariaDB [(none)]> CREATE USER 'wordpressB2BR'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';
+MariaDB [(none)]> CREATE USER 'mchampag'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';
 ```
-##### 4.4 Give all rights
+##### 4.3 Give all rights to the user
+💡`GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';`
 ```SQL
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpressB2BR.* TO 'wordpressB2BR'@'localhost';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpress.* TO 'mchampag'@'localhost';
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
-##### 4.5 Leave MYSQL
+##### 4.4 Leave MYSQL
 ```SQL
 MariaDB [(none)]> quit
 ```
  
-### ✏️ lighttpd : installation and activation
+### ✏️ lighttpd : web server installation and activation
 
-#### 1. Install 
+#### 1. Installation
 ```bash
 apt install lighttpd -y
 ```
@@ -83,12 +84,39 @@ apt install lighttpd -y
 ```
 systemctl start lighttpd
 systemctl enable lighttpd
-systemctl status lighttpd (check status)
+```
+💡`systemctl status lighttpd`
+
+### ✏️ PHP : installation and configuration
+#### 1. Installation
+```bash
+$ sudo apt install php php-cli php-common php-fpm php-mysql -y
 ```
 
-### ✏️ PHP : installation
+#### 2. Modify '/etc/php/7.3/fpm/php.ini' file to activate lighttpd PHP support. (I DIDN'T NEED TO DO THAT)
 ```bash
-$ sudo apt install php-cgi php-mysql -y
+$ sudo vim /etc/php/7.3/fpm/php.ini
+
+Decomment that line
+cgi.fix_pathinfo=1
+```
+
+#### 3. Par défaut, **PHP-FPM** écoute sur le socket UNIX `/var/run/php7-fpm.sock`. Nous devrons donc altérer le fichier `/etc/php/7.4/fpm/pool.d/www.conf` pour que **PHP-FPM** écoute sur le socket TCP. Pour cela, modifier la valeur `listen =` pour `127.0.0.1:9000`
+
+#### 4. 
+
+#### Activate FastCGI and FastCGI-PHP modules
+Configure and restart Lighttpd
+```bash
+$ sudo lighty-enable-mod fastcgi
+$ sudo lighty-enable-mod fastcgi-php
+```
+
+#### Restart PHP and lighttpd
+💡 How to found PHP version `php -v` -> php7.3
+```
+$ sudo systemctl restart php7.3-fpm
+$ sudo systemctl restart lighttpd
 ```
 
 ### ✏️ WORDPRESS : installation and configuration
@@ -144,29 +172,7 @@ define( 'DB_PASSWORD', 'password_here' ); -> Sup3rCh4ts!
 ```
 ❓ Why the database password is in clear? Same as inside MariaDB...
 
-#### 7. Configure and restart Lighttpd
-```bash
-$ sudo lighty-enable-mod fastcgi
-$ sudo lighty-enable-mod fastcgi-php
-$ sudo service lighttpd force-reload
-```
-💡The debian Policy Manual also explains the different parameters:
-```
-    start
-    start the service,
-
-    stop
-    stop the service,
-
-    restart
-    stop and restart the service if it's already running, otherwise start the service
-
-    reload
-    cause the configuration of the service to be reloaded without actually stopping and restarting the service,
-
-    force-reload
-    cause the configuration to be reloaded if the service supports this, otherwise restart the service.
-```
+#### 7. 
 
 ### ✏️ FTP : installation and configuration
 
