@@ -5,6 +5,7 @@
 | 1. Create a new user          | `$ sudo adduser USERNAME`
 | 2. Check if user is added     | `$ getent passwd USERNAME`
 | 3. Check password expiration  | `$ sudo chage -l USERNAME`
+| Delete a user and all entries | `$ deluser USERNAME`
 
 <br>
 
