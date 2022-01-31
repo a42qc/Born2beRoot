@@ -207,8 +207,6 @@ define( 'DB_USER', 'mchampag' );
 define( 'DB_PASSWORD', 'Sup3rCh4ts!' )
 ```
 
-
-
 #### 1. Install w3m (teminal web browser)
 ```bash
 $ sudo apt install w3m -y
@@ -263,7 +261,17 @@ define( 'DB_PASSWORD', 'password_here' ); -> Sup3rCh4ts!
 7. Installation 
 Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.232.35/wordpress/wp-admin/install.php)
 <br>
-![Installation Worpress inside a browser](https://imgur.com/a/XAsVz4m  "WP installation browser")
+- Titre du site : Born2beRoot
+- Identifiant : mchampag
+- Mot de passe : Sup3rCh4ts!
+- Vote e-mail : audrey.42qc@gmail.com
+- I check -> Demander aux moteurs de recherche de ne pas indexer ce site
+
+![Installation Worpress inside a browser](https://i.imgur.com/YDQZe9Y.png)
+
+8. Web site creation
+
+![Tableau de bord Wordpress](https://i.imgur.com/XBoGdsR.png)
 
 ### ✏️ FTP : installation and configuration
 
