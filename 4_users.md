@@ -6,11 +6,12 @@
 | 2. Check if user is added     | `$ getent passwd USERNAME`
 | 3. Check password expiration  | `$ sudo chage -l USERNAME`
 | Delete a user and all entries | `$ deluser USERNAME`
+| Modify an user                | [See examples here](https://www.tecmint.com/usermod-command-examples/)
 
 <br>
 
 ```
-EXAMPLE
+EXAMPLE OF chage -l USERNAME
 
 Last password change : <last-password-change-date>
 Password expires : <last-password-change-date + PASS_MAX_DAYS>
@@ -26,3 +27,4 @@ Number of days of warning before password expires : <PASS_WARN_AGE>
 - [How to delete an user](https://www.cyberciti.biz/faq/linux-remove-user-command/)
 - [How to enable and enforce secure password policies on Ubuntu](https://linuxhint.com/secure_password_policies_ubuntu/)
 - [How to create groups](https://linuxize.com/post/how-to-create-groups-in-linux/)
+- [How to modify an user](https://www.tecmint.com/usermod-command-examples/)
