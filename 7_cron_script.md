@@ -1,4 +1,4 @@
-# Step 8 : Cron script
+# Step 7 : Cron script
 
 ## Commands description
 
