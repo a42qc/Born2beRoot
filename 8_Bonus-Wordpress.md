@@ -98,7 +98,7 @@ server.document-root = "/var/www/html"
 Change it for
 server.document-root = "/var/www"
 ```
-💡 Cela permettra de placer le dossier wordpress (qui contiendra les fichier de la page web) a cette emplacement /var/www. <br>
+💡 Cela permettra de placer le dossier wordpress (qui contiendra les fichier de la page web) a cette emplacement `/var/www`. <br>
 Le fichier de configuration principal est placé ici: `/etc/lighttpd/lighttpd.conf` et les autres fichiers de configuration sont placés ici: `/etc/lighttpd/conf-available` et quand certain fichier sont activés, des lien symboliques sont placé dans le repertoire `/etc/lighttpd/conf-enable`.
 
 #### 3. Modify '/etc/php/7.3/fpm/php.ini' file to activate lighttpd PHP support. (I DIDN'T NEED TO DO THAT)
