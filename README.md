@@ -1,4 +1,4 @@
-# Born2beRoot - Débuter en virtualisation 🌈
+# Born2beRoot 🌈 Débuter en virtualisation
 
 Guide d'installation et de configuration <br/>
 
