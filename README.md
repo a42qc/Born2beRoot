@@ -21,8 +21,8 @@ implémentant des règles strictes.
 6. [hostname and IP](https://github.com/a42qc/Born2beRoot/blob/master/6_hostname_find-IP.md)
 7. [cron and script in bash](https://github.com/a42qc/Born2beRoot/blob/master/7_cron_script.md)
 8. [Bonus: Wordpress and services such as MariaDB database, lighttpd web server, PHP and FTP server](https://github.com/a42qc/Born2beRoot/blob/master/8_Bonus-Wordpress.md)
-9. [Creation of a simple webpage with HTML and CSS]()
-10. [shasum](https://github.com/a42qc/Born2beRoot/blob/master/9_shasum.md)
+9. [Creation of a simple webpage with HTML and CSS](https://github.com/a42qc/Born2beRoot/blob/master/9_HTML_CSS.md)
+10. [shasum](https://github.com/a42qc/Born2beRoot/blob/master/10_shasum.md)
 11. [Evaluation](https://github.com/a42qc/Born2beRoot/blob/master/evaluation.md)
 
 ## Collègues inspirants
