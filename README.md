@@ -26,8 +26,8 @@ implémentant des règles strictes.
 11. [Evaluation](https://github.com/a42qc/Born2beRoot/blob/master/evaluation.md)
 
 ## Collègues inspirants
-- https://github.com/Ticafblanc/42/tree/master/1-cursus/born2beroot
-- https://tchalifour91.notion.site/Journal-du-projet-6674b4305566440598f5c146e17626f4#67739434c51441bbbd44409fa0883cd4
+- [ticafblanc GitHub](https://github.com/Ticafblanc/42/tree/master/1-cursus/born2beroot)
+- [tchalifour](https://tchalifour91.notion.site/Journal-du-projet-6674b4305566440598f5c146e17626f4#67739434c51441bbbd44409fa0883cd4)
 
 ## Tutoriels README.md
 
