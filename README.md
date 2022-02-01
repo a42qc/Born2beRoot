@@ -20,7 +20,7 @@ implémentant des règles strictes.
 5. [UFW firewall and SSH connection](https://github.com/a42qc/Born2beRoot/blob/master/5_UFW_SSH.md)
 6. [hostname and IP](https://github.com/a42qc/Born2beRoot/blob/master/6_hostname_find-IP.md)
 7. [cron and script in bash](https://github.com/a42qc/Born2beRoot/blob/master/7.cron_script.md)
-8. [Bonus: Wordpress and services such as MariaDB database, lighttpd web server, PHP and FTP server'](https://github.com/a42qc/Born2beRoot/blob/master/8-Bonus-Wordpress.md)
+8. [Bonus: Wordpress and services such as MariaDB database, lighttpd web server, PHP and FTP server](https://github.com/a42qc/Born2beRoot/blob/master/8-Bonus-Wordpress.md)
 9. [Creation of a simple webpage with HTML and CSS]()
 10. [shasum](https://github.com/a42qc/Born2beRoot/blob/master/9.shasum.md)
 11. [Evaluation](https://github.com/a42qc/Born2beRoot/blob/master/evaluation.md)
