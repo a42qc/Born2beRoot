@@ -4,14 +4,14 @@
 
 |                                                                |                                    |
 | -------------------------------------------------------------- | ---------------------------------- |
-| 1. How to connect as sudo                                      | `$ su -`
-| 2. How to install                                              | `$ apt install sudo -y`
+| 1. Connect as sudo                                             | `$ su -`
+| 2. Install the package                                         | `$ apt install sudo -y`
 | 3. Create sudo directory                                       | `$ mkdir /var/log/sudo`
 | 4. Create log file for sudoers commands                        | `$ touch commandslog`
 | 3. Reboot                                                      | `$ reboot`
 | 4. Check if installed correctly                                | `$ dpkg -l \| grep sudo`
 |    How to use sudo-privilege                                   | `$ sudo COMMAND`
-|    See chapter 4 (create user) and 3 (add users to groups)     |
+|    See chapter 4 ([create user](https://github.com/a42qc/Born2beRoot/blob/master/4_users.md)) and 3 ([add users to groups](https://github.com/a42qc/Born2beRoot/blob/master/3_groups.md))     |
 
 
 
