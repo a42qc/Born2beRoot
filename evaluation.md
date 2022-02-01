@@ -88,7 +88,7 @@
     - Create a new user and assign it a password respecting the subject rules.
       - `$ sudo adduser USERNAME` 
     - Explain how to set up the rules (should be one or two modified files).
-      - [Password policy](https://github.com/a42qc/Born2beRoot/blob/master/1_password_policy.md)
+      - [Password policy](https://github.com/a42qc/Born2beRoot/blob/master/2_password_policy.md)
       - `$ sudo chage -l USERNAME` Verify password expiration
 
 3. Create a group named "evaluating", assign it to this user and check that this user belongs to the "evaluating" group.
