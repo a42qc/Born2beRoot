@@ -40,15 +40,12 @@ To apply this policy to an existing user, use “chage” command.
 
 ### Method #2 chage - Expiration applicable sur utilisateurs existants
 
-Note : To execute the chage command, you must be the owner of the account or have root privilege otherwise, you will not be able to view or modify the expiry policy. <br?>
-
 |                                                      |                                                       |
 | ---------------------------------------------------- | ----------------------------------------------------- |
-| To use chage command, syntax is:                     | `$ chage [options] username`
 | To view the current password expiry/aging details :  | `$ sudo chage –l USERNAME`
 | To configure the maximum No. of days after which a user should change the password. | `$ sudo chage -M <No./_of_days> <user_name>`
 | To configure the minimum No. of days required between the change of password.       | `$ sudo chage -m <No._of_days> <user_name>`
-| To configure warning prior to password expiration :  | `$ sudo chage -W <No._of_days> <user_name>` <br>                                                                                                                    exemple : chage -M 30 -m 2 -W 7 -d 2021-08-10 USERNAME(or root) (-d do not change the actual password) 
+| To configure warning prior to password expiration :  | `$ sudo chage -W <No._of_days> <user_name>` <br>                                                                                                                   exemple : `$ chage -M 30 -m 2 -W 7 -d 2021-08-10 USERNAME(or root)` (-d do not change the actual password) 
 
 ## II. Complexité (password strength) pam.d
 
@@ -70,20 +67,21 @@ Note : To execute the chage command, you must be the owner of the account or hav
 | `ucredit=-1`               | Min No. of uppercase letters
 | `dcredit=-1`               | Min No. of digits
 | `ocredit=`                 | Min No. of symbols
-| `reject_username`          | Rejects the password containing the user name (oui)
+| `reject_username`          | Rejects the password containing the user name (oui) <br>                                                                                                            To check if the password contains the username in some form (enabled if the value is not 0) usercheck=
 | `enforce_for_root`         | Also enforce the policy for the root user (oui)
 
-~??? To check if the password contains the user name in some form (enabled if the value is not 0) usercheck=  <br>
-exemple : password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root <br>
-Now reboot the system to apply the changes in the password policy.
+exemple : `password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root`
+
+4. Now reboot the system to apply the changes in the password policy.
+
 
 ## Tester et changer tous les mots de passe des utilisateurs, compte root compris.
 
 |                                                   |                                                                                   |
 | ------------------------------------------------- | --------------------------------------------------------------------------------- |
-| To view the current password expiry/aging details | `sudo chage –l username`
-| Test the secure password policy                   | 1. Run this command to add a user: `sudo useradd  testuser` <br>                                                                                                     2. Then set a password: `$ sudo passwd testuser` <br>                                                                                                               3. Now try to enter a password that does not include restrictions.
-| adding a complex password that meets the criteria defined by the password policy | `sudo passwd USERNAME` <br>                                                                                                                                         ex: Sup3rP4ssw0rd! (non c'est pas ça pour vrai)
+| To view the current password expiry/aging details | `$ sudo chage –l username`
+| Test the secure password policy                   | 1. Add a user: `$ sudo useradd testuser` <br>                                                                                                                       2. Set a password: `$ sudo passwd testuser` <br>                                                                                                                     3. Try to enter a password that does not include restrictions.
+| adding a complex password that meets the criteria defined by the password policy | `sudo passwd USERNAME` <br>                                                     
 
 # Documentation
 
