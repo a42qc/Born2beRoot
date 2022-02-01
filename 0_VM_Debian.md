@@ -113,3 +113,9 @@
 
 - [Vidéo](https://www.youtube.com/watch?v=2w-2MX5QrQw) démonstrative de comment partitionner le disque dur virtuel<br/>
 - Commande alternative : [mkpart](https://docs.fedoraproject.org/en-US/quick-docs/creating-a-disk-partition-in-linux/)<br/>
+
+
+
+[Comment supprimer des fichiers et des répertoires sous Linux?](https://geekflare.com/fr/remove-files-and-folder-examples/ "https://geekflare.com")<br/>
+[Désinstaller proprement ses paquets sur sa distribution](https://linuxfr.org/wiki/desinstaller-proprement-ses-paquets-sur-sa-distribution "https://linuxfr.org")<br/>
+[8 Risky Commands in Unix](https://www.proofpoint.com/us/blog/insider-threat-management/8-risky-commands-unix)
