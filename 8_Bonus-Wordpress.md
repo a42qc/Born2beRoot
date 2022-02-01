@@ -12,6 +12,7 @@
 | MariaDB       | Système de gestion de base de données. Fork communautaire de MySQL.
 | PHP           | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques                                         (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
 | Let’s Encrypt | (optionnel) free SSL to secure your web server.
+| FTP           | 
 
 ## Configurations des services (bonus)
 
@@ -50,36 +51,22 @@ $ sudo mysql_secure_installation
 | | (Reloading the privilege tables will ensure that all changes made so far will take effect immediately.)
 
 #### 4. Access to MYSQL shell to create a database for the Wordpress web site.
-```bash
-$ sudo mysql
-```
-##### 4.1 Choose a database name
-```SQL
-MariaDB [(none)]> CREATE DATABASE wordpress;
-```
-💡 Database list
-```SQL
-MariaDB [(none)]> SHOW DATABASES;
-```
-##### 4.2 Create a user
-```
-MariaDB [(none)]> CREATE USER 'mchampag'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';
-```
-##### 4.3 Give all rights to the user
-💡`GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';`
-```SQL
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpress.* TO 'mchampag'@'localhost';
-MariaDB [(none)]> FLUSH PRIVILEGES;
-```
-##### 4.4 Leave MYSQL
-```SQL
-MariaDB [(none)]> quit
-```
+
+|                                               |                                                                                                |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 4.1 Access MariaDB                            | `$ sudo mysql`
+| 4.2 Choose a database name                    | `MariaDB [(none)]> CREATE DATABASE wordpress;`
+| How to acces the database list                | `MariaDB [(none)]> SHOW DATABASES;`
+| 4.3 Create a user                             | `MariaDB [(none)]> CREATE USER 'mchampag'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';`
+| 4.4 Give all rights to the user               | `MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpress.* TO 'mchampag'@'localhost';`
+| syntax                                        | `GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';`
+| 4.5 Clears or reloads various internal caches | `MariaDB [(none)]> FLUSH PRIVILEGES;`
+| 4.6 Leave MYSQL                               | `MariaDB [(none)]> quit`
 
 ___
 
 
-### ✏️ lighttpd : web server installation and activation
+### lighttpd : web server installation and activation
 
 #### 1. Installation
 ```bash
@@ -95,7 +82,7 @@ systemctl enable lighttpd
 ___
 
 
-### ✏️ PHP : installation and configuration
+### PHP : installation and configuration
 #### 1. Installation
 ```bash
 $ sudo apt install php php-cli php-common php-fpm php-mysql -y
@@ -162,9 +149,9 @@ $ sudo systemctl restart lighttpd
 ___
 
 
-### ✏️ WORDPRESS : installation and configuration
+### WORDPRESS : installation and configuration
 
-1. Download
+#### 1. Download
 ```bash
 cd /var/www
 sudo wget https://fr.wordpress.org/latest-fr_FR.tar.gz
@@ -185,18 +172,20 @@ $ w3m http://wordpress.org
 -> Ok
 ```
 
-2. Decompress
+#### 2. Decompress directory with TAR
 ```bash
 $ sudo tar -xf latest-fr_FR.tar.gz
 $ rm latest-fer_FR.tar.gz
 ```
+💡`tar -xvf` means `tar --extract --verbose --file=FILENAME`
 
-3. Change owner and rights
+#### 3. Change owner and rights
 ```bash
 sudo chown -R www-data:www-data wordpress
 sudo chmod -R 755 wordpress
 ```
 💡 `ls -la` to verify changes
+💡 `755` means `rwx r-x r-x`
 
 #### 4. Change the Wordpress configuration file's name
 ```bash
@@ -204,7 +193,7 @@ $ cd /wordpress
 $ mv wp-config-sample.php wp-config.php
 ```
 
-5. Configure 
+#### 5. Configure Wordpress database informations to fit with MariaDB's
 ```bash
 $ vim wp-config.php
 
@@ -214,57 +203,7 @@ define( 'DB_NAME', 'wordpress' );
 define( 'DB_USER', 'mchampag' );
 
 /** Mot de passe de la base de données MySQL. */
-define( 'DB_PASSWORD', 'Sup3rCh4ts!' )
-```
-
-#### 1. Install w3m (teminal web browser)
-```bash
-$ sudo apt install w3m -y
-```
-#### 2. Dowload wordpress
-
-💡 Make sure you are in the right directory. <br>
-Here, I want to download it inside '/home/USERNAME' directory.
-
-```bash
-$ w3m http://wordpress.org
-
--> Get Wordpress
--> Download .tar.gz
-(Download) Save file to: wordpress-5.9.tar.gz
--> Ok
-```
-
-#### 3. Decompress the directory with tar
-```bash
-$ sudo tar -xvf wordpress-5.9.tar.gz
-```
-
-💡`tar -xvf` means `tar --extract --verbose --file=FILENAME`
-
-#### 4. Copy the directory inside `var/www/html`
-```bash
-$ sudo mv wordpress /var/www/html
-$ sudo rm latest.tar.gz
-$ sudo rm -r /var/www/html/wordpress IF YOU WANT TO DELETE THE WORDPRESS DIRECTORY
-```
-
-#### 5. Copy the Wordpress configuration file 
-```bash
-$ cd /var/www/html
-$ sudo cp wordpress/wp-config-sample.php wp-config.php
-$ sudo chmod 700 wp-config.php
-```
-💡 `700` -> `-rwx-------`
-
-#### 6. Configure Wordpress database
-```bash
-$ sudo vim wp-config.php
-```
-```
-define( 'DB_NAME', 'database_name_here' ); -> wordpress
-define( 'DB_USER', 'username_here' ); -> mchampag
-define( 'DB_PASSWORD', 'password_here' ); -> Sup3rCh4ts!
+define( 'DB_PASSWORD', 'Sup3rP4ssw0rd*' )
 ```
 ❓ Why the database password is in clear? Same as inside MariaDB...
 
@@ -279,14 +218,14 @@ Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.23
 
 ![Installation Worpress inside a browser](https://i.imgur.com/YDQZe9Y.png)
 
-8. Web site creation
+8. [Web site creation](https://github.com/a42qc/Born2beRoot/blob/master/9_HTML_CSS.md)
 
 ![Tableau de bord Wordpress](https://i.imgur.com/XBoGdsR.png)
 
 ___
 
 
-### ✏️ FTP : installation and configuration
+### FTP : installation and configuration
 
 #### 1. Install `vsftpd`
 ```bash
@@ -324,13 +263,13 @@ $ sudo chmod a-w ftp
 ___
 
 
-### ✏️ How to use FTP service
+### How to use FTP service
 
-#### 1. Click on `aller`
-#### 2. Click on `Se connecter au serveur...`
-#### 3. `ftp://IPADDRESS`
-#### 4. `username` et `password`
-#### 5. Now, we have access to directories and files
+1. Click on `aller`
+2. Click on `Se connecter au serveur...`
+3. `ftp://IPADDRESS`
+4. `username` et `password`
+5. Now, we have access to directories and files
 
 ___
 
@@ -342,8 +281,3 @@ ___
 - [Désinstaller proprement ses paquets](https://linuxfr.org/wiki/desinstaller-proprement-ses-paquets-sur-sa-distribution#toc-suppression-des-d%C3%A9pendances-avec-apt---purge-autoremove)
 - [How to Install Lighttpd with PHP, MariaDB](https://www.howtoforge.com/how-to-install-lighttpd-with-php-and-mariadb-on-debian-10/)
 - <a href="https://www.osradar.com/install-wordpress-with-lighttpd-debian-10/">Installation et configuration Wordpress</a>
-
-certbot certonly --webroot -w /var/www/html/ -d www.example.com
-dpkg -l | 
-d/sinstallation
-
