@@ -209,11 +209,12 @@ define( 'DB_PASSWORD', 'Sup3rP4ssw0rd*' )
 ❓ Why the database password is in clear? Same as inside MariaDB...
 
 7. Installation 
+
 Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.232.35/wordpress/wp-admin/install.php)
-<br>
+
 - Titre du site : Born2beRoot
 - Identifiant : mchampag
-- Mot de passe : Sup3rCh4ts!
+- Mot de passe : ChooseAPassword
 - Vote e-mail : audrey.42qc@gmail.com
 - I check -> Demander aux moteurs de recherche de ne pas indexer ce site
 
