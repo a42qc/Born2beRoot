@@ -36,3 +36,7 @@ implémentant des règles strictes.
 - [Cheatsheet Markdown](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md#heading-1 "github.com")
 - [HTML tutorial](https://www.w3schools.com/html/ "w3schools.com")
 - [Complete list of github markdown emoji markup ](https://gist.github.com/rxaviers/7360908)
+
+### Projet futur
+
+- Tutotiel Markdown et HTML pour GitHub
