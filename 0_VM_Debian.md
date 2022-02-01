@@ -96,9 +96,11 @@
 5. `$ sudo apt install vim` (Text editor very useful!)
 6. `$ sudo apt install git` (Use https inside the VM to clone a repo)
 
+
 ### Check if install correctly
 
 `$ dpkg -l | grep PAQUAGE`
+
 
 ### Change the keybord language
 
@@ -107,9 +109,17 @@
 3. US english Macbook
 4. Reboot
 
+
+### Shutdown
+
+- shutdown (takes 1 minute to close)
+- shutdown now (like its name says...)
+
+
 ### Tips regarding copy and paste
 
 It's better to use an external terminal and a [SSH connection](https://github.com/a42qc/Born2beRoot/blob/master/5_UFW_SSH.md).
+
 
 ### Instantané (snapshots)
 
@@ -117,6 +127,7 @@ It's better to use an external terminal and a [SSH connection](https://github.co
 2. Click on "Instantanés"
 3. Click on "Prendre un instantané"
 4. Click write on the snapshot desire to start at this moment.
+
 
 # Documentation :
 
