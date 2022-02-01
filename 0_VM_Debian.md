@@ -83,39 +83,36 @@
 |                                |                                                                      |
 | -----------------------------: | -------------------------------------------------------------------- |
 | Configure the package manager  | 1. Scan another CD or DVD : NO <br>                                                                                                                                  2. Debian archive mirror : deb.debian.org <br>                                                                                                                      3. HTTP proxy information : BLANK FOR NONE <br>                                                                                                                      4. wait... <br>                                                                                                                                                      5. Participate in the package usage survey : NO
-| Software selection             | ***Ne RIEN cocher SAUF standard system utilities*** <br>                                                                                                                                            ÇA VEUT DIRE PÈSE PAS SUR ENTER!!!!! <br>                                                                                                                            Utiliser “space” pour sélectionner ou désélectionner
-| GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2.Device for boot loader installation : /dev/sda <br>                                                                                                                3. Continue
+| Software selection             | ***Ne RIEN cocher SAUF standard system utilities*** (optional, can be installed later) <br>                                                                       Don't press ENTER, use SPACEBAR for selection and deselection! <br>                                                               
+| GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2. Device for boot loader installation : /dev/sda <br>                                                                                                              3. Continue
 
 
 ### IV. Mise-à-jour, vérifier partitionnage et installer vim
 
 1. Start the VM
 2. `$ su -`
-3. `apt update -y && apt upgrade -y`
-4. `lsblk` to see if partitions are the same as ask
+3. `$ sudo apt update -y && apt upgrade -y`
+4. `$ lsblk` to see if partitions are the same as ask
 5. `$ sudo apt install vim`
 6. `$ sudo apt install git` (use https inside the VM to clone a repo)
 
 ### Change the keybord language
-1. `sudo dpkg-reconfigure keyboard-configuration`
+1. `$ sudo dpkg-reconfigure keyboard-configuration`
 2. Macbookpro
 3. US english Macbook
 4. Reboot
 
 ### Instantané (snapshots)
 
-1. Cliqué sur les trois points
-2. Cliqué sur Instantanés
-3. Cliqué sur Prendre un instantané
-4. Clic droit sur l'instantané désiré pour démarrer à partir de là.
+1. Click on "..."
+2. Click on "Instantanés"
+3. Click on "Prendre un instantané"
+4. Click write on the snapshot desire to start at this moment.
 
 # Documentation :
 
-- [Vidéo](https://www.youtube.com/watch?v=2w-2MX5QrQw) démonstrative de comment partitionner le disque dur virtuel<br/>
-- Commande alternative : [mkpart](https://docs.fedoraproject.org/en-US/quick-docs/creating-a-disk-partition-in-linux/)<br/>
-
-
-
-[Comment supprimer des fichiers et des répertoires sous Linux?](https://geekflare.com/fr/remove-files-and-folder-examples/ "https://geekflare.com")<br/>
-[Désinstaller proprement ses paquets sur sa distribution](https://linuxfr.org/wiki/desinstaller-proprement-ses-paquets-sur-sa-distribution "https://linuxfr.org")<br/>
-[8 Risky Commands in Unix](https://www.proofpoint.com/us/blog/insider-threat-management/8-risky-commands-unix)
+- [Vidéo démonstrative de comment partitionner le disque dur virtuel](https://www.youtube.com/watch?v=2w-2MX5QrQw)
+- [Commande alternative de partionnage: mkpart](https://docs.fedoraproject.org/en-US/quick-docs/creating-a-disk-partition-in-linux/)
+- [Comment supprimer des fichiers et des répertoires sous Linux?](https://geekflare.com/fr/remove-files-and-folder-examples/ "https://geekflare.com")
+- [Désinstaller proprement ses paquets sur sa distribution](https://linuxfr.org/wiki/desinstaller-proprement-ses-paquets-sur-sa-distribution "https://linuxfr.org")
+- [8 Risky Commands in Unix](https://www.proofpoint.com/us/blog/insider-threat-management/8-risky-commands-unix)
