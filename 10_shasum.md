@@ -1,4 +1,4 @@
-# 9. shasum - Print or Check SHA Checksums 
+# 10. shasum - Print or Check SHA Checksums 
 
 1. Make sure that you are in the right actual state
 2. Open a terminal
