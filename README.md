@@ -39,4 +39,5 @@ implémentant des règles strictes.
 
 ### Projet futur
 
-- Tutotiel Markdown et HTML pour GitHub
+- Tutoriel Markdown et HTML pour GitHub
+- Utiliser GitHub pour la création d'un site web avec tous mes projets
