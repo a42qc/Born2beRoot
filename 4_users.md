@@ -6,7 +6,7 @@
 | 2. Check if user is added     | `$ getent passwd USERNAME`
 | 3. Check password expiration  | `$ sudo chage -l USERNAME`
 | Delete a user and all entries | `$ deluser USERNAME`
-| Modify an user                | [See examples here](https://www.tecmint.com/usermod-command-examples/)
+| User modifications            | [See examples here](https://www.tecmint.com/usermod-command-examples/)
 | How to connect to an user     | `$ su USERNAME`
 | How to list users             | `$ less /etc/passwd` (less instead of cat because it does pages)
 
@@ -29,3 +29,8 @@ Number of days of warning before password expires : <PASS_WARN_AGE>
 - [How to create groups](https://linuxize.com/post/how-to-create-groups-in-linux/)
 - [How to modify an user](https://www.tecmint.com/usermod-command-examples/)
 - [How to list users](https://linuxize.com/post/how-to-list-users-in-linux/)
+
+## Project
+
+- Create a list of difference between `cat` (`split cat`?) VS `less`, `view` like to `vim -R` (static content) and `tail -f` (dynamic content) vs `less +F`
+- https://unix.stackexchange.com/questions/21548/is-there-ever-a-reason-to-use-cat-when-youve-got-less
