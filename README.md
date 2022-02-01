@@ -37,7 +37,7 @@ implémentant des règles strictes.
 - [HTML tutorial](https://www.w3schools.com/html/ "w3schools.com")
 - [Complete list of github markdown emoji markup ](https://gist.github.com/rxaviers/7360908)
 
-### Projet futur
+### Projets futurs
 
 - Tutoriel Markdown et HTML pour GitHub
 - Utiliser GitHub pour la création d'un site web avec tous mes projets
