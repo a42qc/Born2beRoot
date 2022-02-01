@@ -12,35 +12,6 @@ Apprendre à utiliser la connection SSH,
 [Tutoriels README.md](#tutoreadme)<br/>
 [Turoriels Debian](#tutodebian)<br/>
 
-## <a name="commandesdebian">Commandes Debian</a>
-| Commandes    | Description |
-| :----------: | ----------- |
-touch NOMduFICHIER | Créer fichier
-mkdir NOMduDOSSIER | Créer dossier
-chmod PERMISSIONS NOMduFICHIERouDOSSIER | Permissions <br />[How to use the chmod command](https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/ "howtogeek.com")<br /> [Wiki chmod](https://fr.wikipedia.org/wiki/Chmod "Wikipedia is nice")
-chown UTILISATEURouGROUPE CIBLE| [How to use the chown command](https://linuxize.com/post/linux-chown-command/ "linuxize.com")
-cd NOMduDOSSIER | Changer de dossier
-cd .. | Changer dossier vers parent
-cd ../DOSSIER | Changer de dossier vers dossier dans le même dossier parent
-cd ~ (ou juste cd) | dossier racine
-grep MOTquejeCHERCHE /dans/un/fichier | Effectuer une recherche
-dpkg -l \| grep MonPAQUET | Vérifier si paquet installé 
-mv SOURCE DESTINATION | Déplacer fichier/dossier
-cp -r SOURCE DESTINATION | Copier fichier/dossier
-rm | Supprimer fichier
-rmdir | Supprimer dossier vide
-rm -r | Supprimer dossier et son contenu
-rm -rf | DANGER : deletes everything in its path, including files on hard drives or connected devices.
-apt-get update && apt-get upgrade | Faire avant installation d'un paquet
-apt-get install MonPAQUET | Installer paquet (-y ou The --yes flag simply answers yes to any questions that come up so the install won't hang waiting for someone to press a key. )
-sudo apt-get --purge autoremove  PAQUETàSUPPRIMER | Supprimer un paquet et ses dépendances
-reboot | Redémarrer VM 
-poweroff | Éteindre VM
-hostnamectl | 
-uname -r | Version de Kernel
-hostname -I | Adresse IP
-ssh NOMdUTILISATEUR@ADRESSEIPduSERVEUR -p NUMduPORT | Connection SSH à patir d'un terminal
-
 ## <a name="ressources">Ressources</a>
 
 ### <a name="tutoreadme">Tutoriels README.md</a>
@@ -58,18 +29,9 @@ ssh NOMdUTILISATEUR@ADRESSEIPduSERVEUR -p NUMduPORT | Connection SSH à patir d'
 
 
 
-# Configuration de la VM
-
-
-
-
-
-
-
-
-
-
-#
+# Collègues inspirants
+- https://github.com/Ticafblanc/42/tree/master/1-cursus/born2beroot
+- https://tchalifour91.notion.site/Journal-du-projet-6674b4305566440598f5c146e17626f4#67739434c51441bbbd44409fa0883cd4
 
 
   
