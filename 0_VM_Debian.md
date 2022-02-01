@@ -67,10 +67,10 @@
 
 <br>
 
-| Volume & size                        | use as :                    | Mont point :                                   | 
-| :----------------------------------: | :-------------------------: | :--------------------------------------------: | 
+| Volume & size                        | use as :                    | Mont point :                                      | 
+| :----------------------------------: | :-------------------------: | :-----------------------------------------------: | 
 | root 10,75G (7% de 10G)              | Ext4 journaling file system | Mount point : / - the root file system
-| swap 2,5G (7% de 2,3G)               | swap area [SWAP]            |                                                |
+| swap 2,5G (7% de 2,3G)               | swap area [SWAP]            |                                                   |
 | home 5,4G (7% de 5G)                 | Ext4 journaling file system | /home - user home directory 
 | var 3,25G (7% de 3G)                 | Ext4 journaling file system | /var - variable data 
 | srv 3,25G (7% de 3G)                 | Ext4 journaling file system | /srv - data for services provided by this system 
@@ -80,27 +80,36 @@
 
 5. Last step
 
-|                                |                                                                      |
-| -----------------------------: | -------------------------------------------------------------------- |
-| Configure the package manager  | 1. Scan another CD or DVD : NO <br>                                                                                                                                  2. Debian archive mirror : deb.debian.org <br>                                                                                                                      3. HTTP proxy information : BLANK FOR NONE <br>                                                                                                                      4. wait... <br>                                                                                                                                                      5. Participate in the package usage survey : NO
+|                                |                                                                                              |
+| -----------------------------: | -------------------------------------------------------------------------------------------- |
+| Configure the package manager  | 1. Scan another CD or DVD : NO <br>                                                                                                                                  2. Debian archive mirror : deb.debian.org <br>                                                                                                                      3. HTTP proxy information : BLANK FOR NONE <br>                                                                                                                    4. wait... <br>                                                                                                                                                    5. Participate in the package usage survey : NO
 | Software selection             | ***Ne RIEN cocher SAUF standard system utilities*** (optional, can be installed later) <br>                                                                       Don't press ENTER, use SPACEBAR for selection and deselection! <br>                                                               
 | GRUB boot loader               | 1. Install the GRUB boot loader to the master boot record : YES <br>                                                                                                2. Device for boot loader installation : /dev/sda <br>                                                                                                              3. Continue
 
 
-### IV. Mise-à-jour, vérifier partitionnage et installer vim
+### IV. Update, check partions and install programs such as Vim and Git
 
 1. Start the VM
 2. `$ su -`
 3. `$ sudo apt update -y && apt upgrade -y`
 4. `$ lsblk` to see if partitions are the same as ask
-5. `$ sudo apt install vim`
-6. `$ sudo apt install git` (use https inside the VM to clone a repo)
+5. `$ sudo apt install vim` (Text editor very useful!)
+6. `$ sudo apt install git` (Use https inside the VM to clone a repo)
+
+### Check if install correctly
+
+`$ dpkg -l | grep PAQUAGE`
 
 ### Change the keybord language
+
 1. `$ sudo dpkg-reconfigure keyboard-configuration`
 2. Macbookpro
 3. US english Macbook
 4. Reboot
+
+### Tips regarding copy and paste
+
+It's better to use an external terminal and a [SSH connection](https://github.com/a42qc/Born2beRoot/blob/master/5_UFW_SSH.md).
 
 ### Instantané (snapshots)
 
