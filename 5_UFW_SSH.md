@@ -26,6 +26,9 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
   • Cet utilisateur appartiendra aux groupes user42 et sudo.
 ```
 
+___
+
+
 ## Firewall : Installation, status and port activation
 
 ### Installation ufw
@@ -35,7 +38,7 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 | 1. Update and upgrade           | `$ sudo apt update -y && apt upgrade -y` 
 | 2. Install ufw                  | `$ sudo apt install ufw -y`
 | 3. Reboot the system            | `$ reboot`
-| 4. Check if correctly installed | `dpkg -l \| grep ufw`
+| 4. Check if correctly installed | `$ dpkg -l \| grep ufw`
 
 
 ### Firewall status and port activation
@@ -47,6 +50,8 @@ base. Pour l’installer, vous allez devoir probablement utiliser DNF.
 | Activate a port                 | `sudo ufw allow PORTNUMBER` <br>                                                                                                                                  For B2bR : 4242, 80(http) et 21(FTP)
 | Disable a port                  | `sudo ufw deny NUMÉROduPORT`      
       
+___
+
 
 ## SSH : Installation, status and port configuration
 
@@ -99,6 +104,8 @@ To disable SSH login as root irregardless of authentication mechanism
 | 1. Get IP address                            | `hostname -I`
 | 2. Connect to the server by another terminal | `$ ssh NOMd'UTILISATEUR@ADRESSEip -p NUMÉROduPORT` <br>                                                                                                            exemple : `ssh audrey@10.12.231.216 -p 4242`
 | Finish a SSH session                         | `$ logout` OR ( `$ exit`)
+
+___
 
 
 # Documentation
