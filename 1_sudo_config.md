@@ -11,7 +11,7 @@
 | 3. Reboot                                                      | `$ reboot`
 | 4. Check if installed correctly                                | `$ dpkg -l \| grep sudo`
 |    How to use sudo-privilege                                   | `$ sudo COMMAND`
-|    See chapter 6 (create user) and 4 (add users to groups)     |
+|    See chapter 4 (create user) and 3 (add users to groups)     |
 
 
 
@@ -19,8 +19,8 @@
 
 |                                   |                                       |
 | --------------------------------- | ------------------------------------- |
-|                                   | `$ sudo visudo` 
-| OR  modify sudoers.d file         | `$ sudo vim /etc/sudoers.d/FileName`
+| With command                      | `$ sudo visudo` 
+| OR modify sudoers.d file          | `$ sudo vim /etc/sudoers.d/FileName`
 
 
 <br>
