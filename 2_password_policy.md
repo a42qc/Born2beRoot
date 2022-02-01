@@ -21,6 +21,8 @@ Pour mettre en place une politique de mot de passe fort, il faudra remplir les c
 Après avoir mis en place vos fichiers de configuration, il faudra changer tous les mots de passe des comptes présents 
 sur la machine virtuelle, compte root inclus.
 ```
+___
+
 
 ## I. Expiration (password age)
 
@@ -46,6 +48,9 @@ To apply this policy to an existing user, use “chage” command.
 | To configure the maximum No. of days after which a user should change the password. | `$ sudo chage -M <No./_of_days> <user_name>`
 | To configure the minimum No. of days required between the change of password.       | `$ sudo chage -m <No._of_days> <user_name>`
 | To configure warning prior to password expiration :  | `$ sudo chage -W <No._of_days> <user_name>` <br>                                                                                                                   exemple : `$ chage -M 30 -m 2 -W 7 -d 2021-08-10 USERNAME(or root)` (-d do not change the actual password) 
+
+___
+
 
 ## II. Complexité (password strength) pam.d
 
@@ -82,6 +87,8 @@ exemple : `password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=
 | To view the current password expiry/aging details | `$ sudo chage –l username`
 | Test the secure password policy                   | 1. Add a user: `$ sudo useradd testuser` <br>                                                                                                                       2. Set a password: `$ sudo passwd testuser` <br>                                                                                                                     3. Try to enter a password that does not include restrictions.
 | adding a complex password that meets the criteria defined by the password policy | `$ sudo passwd USERNAME` <br>                                                                                                                                         ex: `Sup3rP4ssw0rd*`
+___
+
 
 # Documentation
 
