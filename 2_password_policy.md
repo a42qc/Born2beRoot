@@ -81,7 +81,7 @@ exemple : `password        requisite	pam_pwquality.so retry=3 minlen=10 ucredit=
 | ------------------------------------------------- | --------------------------------------------------------------------------------- |
 | To view the current password expiry/aging details | `$ sudo chage –l username`
 | Test the secure password policy                   | 1. Add a user: `$ sudo useradd testuser` <br>                                                                                                                       2. Set a password: `$ sudo passwd testuser` <br>                                                                                                                     3. Try to enter a password that does not include restrictions.
-| adding a complex password that meets the criteria defined by the password policy | `sudo passwd USERNAME` <br>                                                     
+| adding a complex password that meets the criteria defined by the password policy | `$ sudo passwd USERNAME` <br>                                                                                                                                         ex: `Sup3rP4ssw0rd*`
 
 # Documentation
 
