@@ -1,4 +1,4 @@
-# 8. BONUS : Wordpress lighttpd, MariaDB et PHP
+# 8. BONUS : Wordpress lighttpd, MariaDB, PHP and vsFTPd
 
 ## Tâches
 📌 Mettre en place un site web WordPress fonctionnel avec les services lighttpd, MariaDB et PHP.
@@ -12,13 +12,13 @@
 | MariaDB       | Système de gestion de base de données. Fork communautaire de MySQL.
 | PHP           | Hypertext Preprocessor est un langage de programmation libre, principalement utilisé pour produire des pages Web dynamiques                                         (et applications web) via un serveur HTTP. Langage impératif orienté objet. 
 | Let’s Encrypt | (optionnel) free SSL to secure your web server.
-| FTP           | 
+| vsFTPd        | FTP means : File Transfer Server                                                                                                                                   vsFTPd (Very Secure FTP Daemon) est un serveur FTP qui mise beaucoup sur la sécurité.                                                                               Il est l'un des premiers logiciels serveurs à mettre en œuvre la séparation des privilèges,                                                                         minimisant ainsi les risques de piratage. 
 
 ## Configurations des services (bonus)
 
 ___
 
-### ✏️ MariaDB : database server installation and configuration 
+### 🔵 MariaDB : database server installation and configuration 
 
 #### 1. Install MariaDB server and client
 ```bash
@@ -57,7 +57,7 @@ $ sudo mysql_secure_installation
 | 4.1 Access MariaDB                            | `$ sudo mysql`
 | 4.2 Choose a database name                    | `MariaDB [(none)]> CREATE DATABASE wordpress;`
 | How to acces the database list                | `MariaDB [(none)]> SHOW DATABASES;`
-| 4.3 Create a user                             | `MariaDB [(none)]> CREATE USER 'mchampag'@'localhost' IDENTIFIED BY 'Sup3rCh4ts!';`
+| 4.3 Create a user                             | `MariaDB [(none)]> CREATE USER 'mchampag'@'localhost' IDENTIFIED BY 'ChooseAPassword';`
 | 4.4 Give all rights to the user               | `MariaDB [(none)]> GRANT ALL PRIVILEGES ON wordpress.* TO 'mchampag'@'localhost';`
 | syntax                                        | `GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';`
 | 4.5 Clears or reloads various internal caches | `MariaDB [(none)]> FLUSH PRIVILEGES;`
@@ -66,7 +66,7 @@ $ sudo mysql_secure_installation
 ___
 
 
-### lighttpd : web server installation and activation
+### 🔵 lighttpd : web server installation and activation
 
 #### 1. Installation
 ```bash
@@ -82,13 +82,13 @@ systemctl enable lighttpd
 ___
 
 
-### PHP : installation and configuration
+### 🔵 PHP : installation and configuration
 #### 1. Installation
 ```bash
 $ sudo apt install php php-cli php-common php-fpm php-mysql -y
 ```
 
-#### 2. Puis, sans être essentiel dans le même fichier de configuration, l'emplacement par defaut du repertoire racine des fichiers qui compose les pages web est /var/www/html . Pour modifier la racine des fichiers web, éditer la ligne server.document-root comme ceci:
+#### 2. Change the root directory location `/var/www/html` by `/var/www` 
 ```bash
 $ sudo vim /etc/lighttpd/lighttpd.conf
 
@@ -98,9 +98,8 @@ server.document-root = "/var/www/html"
 Change it for
 server.document-root = "/var/www"
 ```
-Cela permettra de placer le dossier wordpress (qui contiendra les fichier de la page web) a cette emplacement /var/www.
-
-Le fichier de configuration principal est placés ici: /etc/lighttpd/lighttpd.conf et les autres fichiers de configuration sont placés ici: /etc/lighttpd/conf-available et quand certain fichier sont activés, des lien symboliques sont placé dans le repertoire /etc/lighttpd/conf-enable.
+💡 Cela permettra de placer le dossier wordpress (qui contiendra les fichier de la page web) a cette emplacement /var/www. <br>
+Le fichier de configuration principal est placé ici: `/etc/lighttpd/lighttpd.conf` et les autres fichiers de configuration sont placés ici: `/etc/lighttpd/conf-available` et quand certain fichier sont activés, des lien symboliques sont placé dans le repertoire `/etc/lighttpd/conf-enable`.
 
 #### 3. Modify '/etc/php/7.3/fpm/php.ini' file to activate lighttpd PHP support. (I DIDN'T NEED TO DO THAT)
 ```bash
@@ -138,7 +137,9 @@ $ sudo lighty-enable-mod fastcgi-php
 ```
 
 #### 7. Restart PHP and lighttpd
+
 💡 How to found PHP version `php -v` -> php7.3
+
 ```
 $ sudo systemctl restart php7.3-fpm
 $ sudo systemctl restart lighttpd
@@ -149,7 +150,7 @@ $ sudo systemctl restart lighttpd
 ___
 
 
-### WORDPRESS : installation and configuration
+### 🔵 WORDPRESS : installation and configuration
 
 #### 1. Download
 ```bash
@@ -184,7 +185,7 @@ $ rm latest-fer_FR.tar.gz
 sudo chown -R www-data:www-data wordpress
 sudo chmod -R 755 wordpress
 ```
-💡 `ls -la` to verify changes
+💡 `ls -la` to verify changes <br>
 💡 `755` means `rwx r-x r-x`
 
 #### 4. Change the Wordpress configuration file's name
@@ -225,7 +226,7 @@ Inside a web browser write this : IP_ADDRESS/wordpress/wp-admin (http://10.12.23
 ___
 
 
-### FTP : installation and configuration
+### 🔵 FTP : installation and configuration
 
 #### 1. Install `vsftpd`
 ```bash
@@ -259,8 +260,6 @@ $ sudo chown nobody:nogroup ftp
 $ sudo chmod a-w ftp
 ```
 💡 `a-w` -> `dr-xr-xr-x`
-
-___
 
 
 ### How to use FTP service
