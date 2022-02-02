@@ -13,10 +13,20 @@
 #### Explain the basic fonctioning of the virtual machine.
 
 #### Why did I choose Debian instead of CentOS?
-  - Debian is recommanded for beginner. It's easier to install, configure and upgrade. It's stable and there is a lot of packages too.
+  - Debian is recommanded for beginner. 
+    - It's easier to install, configure and upgrade.
+    - It has a GUI (graphical user interface)
+    - Kali, Ubuntu, Mint, Parrot are Debian-based Linux distributions.
+  - CentOS is mostly recommanded for advanced users. 
+    - It is more stable and has less updates. 
+    - GUI exists, but it's better to use command lines.
+    - It comes recommended for users or small businesses that want to set up a server for file sharing, web hosting, and other enterprise-level tasks.
+    - CentOS is RedHat-bases Linux distributions like Rocky, Fedora, Oracle.
 
 #### What is a virtual machine?
-  - A Virtual Machine (VM) is the **same thing than other physical computer** (laptop, smart phone or server). It has a CPU, memory, disks to store your files, and can connect to the internet if needed. While the parts that make up your computer (called hardware) are physical and tangible, VMs are often thought of as virtual computers or software-defined **computers within physical servers, existing only as code**.
+  - A Virtual Machine (VM) is the **same thing than other physical computer** (laptop, smart phone or server). (emulation)
+  - It has a CPU, memory, disks to store your files, and can connect to the internet if needed. 
+  - While the parts that make up your computer (called hardware) are physical and tangible, VMs are often thought of as virtual computers or software-defined **computers within physical servers, existing only as code**. 
 
 #### Here are a few ways virtual machines are used/purpose :
   - Building and deploying apps to the cloud.
@@ -31,8 +41,8 @@
   - **Virtualization is the process of creating a software-based**, or "virtual" version of a computer, **with dedicated amounts of CPU, memory, and storage that are "borrowed" from a physical host** computer—such as your personal computer— and/or a remote server—such as a server in a cloud provider's datacenter. A virtual machine is a **computer file**, typically called an image, that behaves like an actual computer. It **can run in a window as a separate computing environment**, often to run a different operating system—or even to function as the user's entire computer experience—as is common on many people's work computers. The virtual machine **is partitioned from the rest of the system**, meaning that the software inside a VM **can't interfere with the host computer's primary operating system**.
 
 #### What is the difference betweet aptitude and APT?
-  - Aptitude and apt-get are two of the popular tools which **handle package management**. Both are capable of handling all kinds of activities on packages including **installation, removal, search, etc**. 
-  - Aptitude is a high-level package manager
+  - Aptitude and apt are two of the popular tools which **handle package management**. Both are capable of handling all kinds of activities on packages including **installation, removal, search, etc**. 
+  - Aptitude is a high-level package manager, and provides a terminal menu interface.
   - APT is lower-level package manager
 
 #### What is AppArmor?
@@ -42,12 +52,7 @@
   - SSH or Secure Shell is a network communication protocol that enables two computers to communicate (c.f http or hypertext transfer protocol, which is the protocol used to transfer hypertext such as web pages) and share data. An inherent feature of ssh is that the communication between the two computers is encrypted meaning that it is suitable for use on insecure networks.
   - SSH is often used to "login" and perform operations on remote computers but it may also be used for transferring data.
 
-#### How my script works (must display information all every 10 minutes)
-|                                  |                                        |
-| -------------------------------- | -------------------------------------- |
-| `$ sudo crontab -e`              | To open cron inside text editor
-| ################################ | ######################################
-|
+#### How my script works (must display information all every 10 minutes) [CLIC HERE](https://github.com/a42qc/Born2beRoot/blob/master/7_cron_script.md)
 
 
 ## SIMPLE SETUP
@@ -141,7 +146,7 @@
     - `$ sudo ufw status`
 3. Explain basically what UFW is and the value of using it.
     - Very simple and effective firewall
-    - Firewall is a set of software filters that controls (allow or not open ports) incoming and outgoings traffic in your computer.                                     In simple words, it is a sort of wall between your computer and the outside world.
+    - A firewall is a set of software filters that controls (allow or not open ports) incoming and outgoings traffic in your computer.                                     In simple words, it is a sort of wall between your computer and the outside world.
 4. List the active rules in UFW. A rule must exist for port 4242.
     - See 2.
 5. Assign a new rule to open port 8080. Check that this one has been added by listing the active rules.
@@ -170,6 +175,7 @@
 ## Script Monitoring
 
 1. Explain the operation of the script by displaying the code
+    - `$ sudo crontab -u root -e`
 2. What is cron?
     - cron est un programme qui permet aux utilisateurs des systèmes Unix d’exécuter automatiquement                                                                     des scripts, des commandes ou des logiciels à une date et une heure spécifiée à l’avance, ou selon un cycle défini à l’avance. 
 3. How to set up the script so that it runs every 10 minutes when the server starts up.
@@ -182,6 +188,9 @@
 
 - [PDF correction](https://github.com/sltcestloic/born2beroot_correction/blob/master/correction_born2beroot.pdf)
 - [CentOS vs Debian](https://www.openlogic.com/blog/centos-vs-debian)
+- [RedHat vs Debian](https://waytolearnx.com/2019/04/difference-entre-redhat-et-debian.html)
+- [Debian Linux distro](https://www.tecmint.com/debian-based-linux-distributions/)
+- [RedHat Linux disto](https://www.tecmint.com/redhat-based-linux-distributions/)
 - [What is a VM](https://azure.microsoft.com/en-us/overview/what-is-a-virtual-machine/#how-do-work)
 - [Difference between apt and aptitude](https://www.tecmint.com/difference-between-apt-and-aptitude/)
 - [What is AppArmor](https://en.wikipedia.org/wiki/AppArmor)
