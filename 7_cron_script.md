@@ -16,7 +16,8 @@ sous forme de pourcentage.
 • Le nombre d’utilisateurs utilisant le serveur.
 • L’adresse IPv4 de votre serveur, ainsi que son adresse MAC (Media Access Control).
 • Le nombre de commande executées avec le programme sudo.
-Dès le lancement de votre serveur, le script écrira des informations toutes les 10 minutes sur tous les terminaux (jetez un œil du côté de wall). La bannière est facultative.
+Dès le lancement de votre serveur, le script écrira des informations toutes les 10 minutes 
+sur tous les terminaux (jetez un œil du côté de wall). La bannière est facultative.
 ```
 
 1. Créer le fichier monitoring.sh dans dossier root.
@@ -80,8 +81,18 @@ ___
 ### Command description
 
 ```
+shebang : en-tête d'un fichier texte qui indique au système d'exploitation (de type Unix) 
+que ce fichier n'est pas un fichier binaire mais un script (ensemble de commandes) ; 
+sur la même ligne est précisé l'interpréteur permettant d'exécuter ce script.
 #!/bin/bash
+
+NOMVARIABLE=$( INSTRUCTIONS )
+uname -a : print all system information, in the following order
 archi=$( uname -a )
+
+lscpu: display information about the CPU architecture
+awk '/^CPU.s.:/ {print $NF}':
+print: [printf vs print](https://www.gnu.org/software/gawk/manual/html_node/Basic-Printf.html)
 pcpu=$( lscpu | awk '/^CPU.s.:/ {print $NF}' )
 vcpu=$( lscpu | awk '/^Core.s. per socket:/ {cores=$NF} /^Socket.s.:/ {sockets=$NF} END {print cores * sockets}' )
 ramfree=$( free -m | awk '/^Mem:/ {printf("%.0f"), $4}' )
