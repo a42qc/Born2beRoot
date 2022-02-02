@@ -43,7 +43,6 @@ archi=$( uname -a )
 pcpu=$( lscpu | awk '/^CPU.s.:/ {print $NF}' )
 vcpu=$( lscpu | awk '/^Core.s. per socket:/ {cores=$NF} /^Socket.s.:/ {sockets=$NF} END {print cores * sockets}' )
 ramfree=$( free -m | awk '/^Mem:/ {printf("%.0f"), $4}' )
-
 ramtotal=$( free -m | awk '/^Mem:/ {print $2}' )
 ramused=$( free -m | awk '/^Mem:/ {printf("%.2f"), $3*100/$2}' )
 romfree=$( df -h --total | awk '/^total/ {printf("%.1f"), $3}' )
