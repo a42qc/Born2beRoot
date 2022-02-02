@@ -1,7 +1,5 @@
 # Step 7 : Cron script
 
-## Commands description
-
 ## monitoring.sh
 ```
 L’architecture de votre système d’exploitation ainsi que sa version de kernel.
@@ -18,6 +16,7 @@ sous forme de pourcentage.
 • Le nombre d’utilisateurs utilisant le serveur.
 • L’adresse IPv4 de votre serveur, ainsi que son adresse MAC (Media Access Control).
 • Le nombre de commande executées avec le programme sudo.
+Dès le lancement de votre serveur, le script écrira des informations toutes les 10 minutes sur tous les terminaux (jetez un œil du côté de wall). La bannière est facultative.
 ```
 
 1. Créer le fichier monitoring.sh dans dossier root.
@@ -26,13 +25,6 @@ sous forme de pourcentage.
 2. Développer le script en bash
 ` #!/bin/bash `
 
-
-grep echo awk printf cat (utiliser le path) (ne pas utiliser BC, utiliser awk à la place)
-uname : affiche les informations système sur la machine sur laquelle elle est exécutée.
-wall
-Dès le lancement de votre serveur, le script écrira des informations toutes les 10 minutes sur tous les terminaux (jetez un œil du côté de wall). La bannière est facultative.
-
-The wall command is used to send a message to all logged in users. Wall displays the contents of file or, by default, its standard input, on the terminals of all currently logged in users.
 ```
 $ wall [-n] [-t TIMEOUT] [file]
 $ echo "test message" | wall
@@ -40,8 +32,52 @@ $ echo "test message" | wall
 
 -n : without the header (banniere)
 
+___
 
 ## My script
+
+```
+#!/bin/bash
+archi=$( uname -a )
+pcpu=$( lscpu | awk '/^CPU.s.:/ {print $NF}' )
+vcpu=$( lscpu | awk '/^Core.s. per socket:/ {cores=$NF} /^Socket.s.:/ {sockets=$NF} END {print cores * sockets}' )
+ramfree=$( free -m | awk '/^Mem:/ {printf("%.0f"), $4}' )
+
+ramtotal=$( free -m | awk '/^Mem:/ {print $2}' )
+ramused=$( free -m | awk '/^Mem:/ {printf("%.2f"), $3*100/$2}' )
+romfree=$( df -h --total | awk '/^total/ {printf("%.1f"), $3}' )
+romtotal=$( df -h --total | awk '/^total/ {printf("%d"), $2}' )
+romused=$( df -h --total | awk '/^total/ {printf("%d"), $5}' )
+lcpu=$( mpstat | grep all | awk '{printf("%.2f"), 100-$13}' )
+boot=$( who -b | awk '{print $3, $4}' )
+lvm=$( if [ $( lsblk | grep 'lvm' | wc -l ) -eq 0 ]; then echo "no"; else echo "yes"; fi )
+tcp=$( ss -s | awk '/^TCP:/ {printf("%d"), $4}' )
+user=$( users | wc -w )
+ip=$( hostname -I )
+#mac=$( ifconfig | grep ether | head -1 | awk '{print $2}' )
+mac=$( ip a | grep link/ether | awk '{print $2}' )
+sudo=$( cat /var/log/sudo/commandslog | grep COMMAND | wc -l )
+
+wall -n "
+#Architecture : $archi
+#CPU physical : $pcpu
+#vCPU : $vcpu
+#Memory usage : $ramfree/"$ramtotal"MB free  ( $ramused% used )
+#Disk usage : $romfree/"$romtotal"Gb free ( $romused% used )
+#CPU load : $lcpu%
+#Last boot : $boot
+#LVM use : $lvm
+#Connections TCP : $tcp ESTABLISHED
+#Users log : $user
+#Network : IP $ip  ( $mac )
+#sudo : $sudo cmd
+"
+```
+
+___
+
+
+### Command description
 
 ```
 #!/bin/bash
@@ -82,6 +118,9 @@ wall -n "
 #sudo : $sudo cmd
 "
 ```
+
+___
+
 
 ## What to install
 ```
