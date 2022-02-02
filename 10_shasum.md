@@ -13,4 +13,4 @@ If you know the checksum of an original file, you can use a checksum utility to 
 
 # Documentation
 
-- (What is checksum)[https://www.howtogeek.com/363735/what-is-a-checksum-and-why-should-you-care/]
+- [What is checksum](https://www.howtogeek.com/363735/what-is-a-checksum-and-why-should-you-care/)
