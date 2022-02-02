@@ -77,10 +77,10 @@ wall -n "
 ___
 
 
-### Command description
+### Command descriptions
 
 ```
-shebang : en-tête d'un fichier texte qui indique au système d'exploitation (de type Unix) 
+#### shebang : en-tête d'un fichier texte qui indique au système d'exploitation (de type Unix) 
 que ce fichier n'est pas un fichier binaire mais un script (ensemble de commandes) ; 
 sur la même ligne est précisé l'interpréteur permettant d'exécuter ce script.
 #!/bin/bash
@@ -93,6 +93,8 @@ lscpu: display information about the CPU architecture
 awk '/^CPU.s.:/ {print $NF}':
 print: [printf vs print](https://www.gnu.org/software/gawk/manual/html_node/Basic-Printf.html)
 pcpu=$( lscpu | awk '/^CPU.s.:/ {print $NF}' )
+
+
 vcpu=$( lscpu | awk '/^Core.s. per socket:/ {cores=$NF} /^Socket.s.:/ {sockets=$NF} END {print cores * sockets}' )
 ramfree=$( free -m | awk '/^Mem:/ {printf("%.0f"), $4}' )
 # arrondir
@@ -113,6 +115,7 @@ ip=$( hostname -I )
 mac=$( ip a | grep link/ether | awk '{print $2}' )
 sudo=$( cat /var/log/sudo/commandslog | grep COMMAND | wc -l )
 
+#### wall: write a message to all users -n: suppress the banner
 wall -n "
 #Architecture : $archi
 #CPU physical : $pcpu
