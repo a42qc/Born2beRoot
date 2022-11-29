@@ -38,7 +38,7 @@ ___
 | 1. Update and upgrade           | `$ sudo apt update -y && apt upgrade -y` 
 | 2. Install ufw                  | `$ sudo apt install ufw -y`
 | 3. Reboot the system            | `$ reboot`
-| 4. Check if correctly installed | `$ dpkg -l \| grep ufw`
+| 4. Check if correctly installed | `$ dpkg -l \| grep ufw` or `ssh -h`
 
 
 ### Firewall status and port activation
