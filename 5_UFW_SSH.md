@@ -38,7 +38,7 @@ ___
 | 1. Update and upgrade           | `$ sudo apt update -y && apt upgrade -y` 
 | 2. Install ufw                  | `$ sudo apt install ufw -y`
 | 3. Reboot the system            | `$ reboot`
-| 4. Check if correctly installed | `$ dpkg -l \| grep ufw` or `ssh -h`
+| 4. Check if correctly installed | `$ dpkg -l \| grep ufw`
 
 
 ### Firewall status and port activation
@@ -61,7 +61,7 @@ ___
 | -------------------------------- | ---------------------------------------------- |
 | 1. Install openssh               | `$ sudo apt install ssh -y` (opensshd_server?)
 | 2. Reboot the system             | `$ sudo reboot`
-| 3. Check if correctly installed  | `$ dpkg -l \| grep ssh`
+| 3. Check if correctly installed  | `$ dpkg -l \| grep ssh` or `ssh -h`
 
 
 ### Status and activation
